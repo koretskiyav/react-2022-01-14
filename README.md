@@ -5,6 +5,9 @@
 !! new branch !!
 !! new branch !!
 !! new branch !!
+!! new branch UPDATE !!
+!! new branch UPDATE !!
+!! new branch UPDATE !!
 
 
 0. Сделать форк этого репозитория в свой аккаунт (только 1 раз в самом начале).
