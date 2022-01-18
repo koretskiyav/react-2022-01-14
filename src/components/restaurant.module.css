@@ -1,0 +1,14 @@
+.restaurant {
+    margin: 24px 0 0;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.heading {
+    margin: 0;
+}
