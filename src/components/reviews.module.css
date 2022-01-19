@@ -1,0 +1,9 @@
+.body{
+    display: flex;
+    flex-wrap: wrap;
+}
+.title{
+    margin: 8px;
+    padding: 8px;
+    width: 100%;
+}
