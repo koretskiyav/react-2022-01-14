@@ -1,0 +1,10 @@
+.rating {
+  width: 225px;
+  background: url(../icons/star-shape.svg);
+}
+
+.stars {
+  height: 24px;
+  width: var(--i);
+  background: url(../icons/star.svg);
+}

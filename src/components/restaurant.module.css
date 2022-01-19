@@ -1,0 +1,22 @@
+.restaurant {
+  padding: 20px 0;
+}
+
+.header {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+}
+
+.reviewer {
+  margin: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 8px;
+}
