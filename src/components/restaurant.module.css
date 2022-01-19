@@ -1,0 +1,21 @@
+.title,
+.menu,
+.reviews {
+  margin: 0.5em 0;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.menu {
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.reviews {
+}
