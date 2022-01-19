@@ -8,15 +8,15 @@ export default function Rate({ rate = 1 }) {
   const roundedRate = Math.round(rate);
   const boundedRate = Math.min(Math.max(roundedRate, 1), MAX_RATE);
 
-  const pointItems = [];
+  const pointElements = [];
   for (let i = 1; i <= MAX_RATE; i++) {
     let itemClass = i <= boundedRate ? styles.scored : styles.unscored;
-    pointItems.push(
+    pointElements.push(
       <span>
         <Star className={itemClass} />
       </span>
     );
   }
 
-  return <div>{pointItems}</div>;
+  return <div>{pointElements}</div>;
 }
