@@ -59,7 +59,7 @@ export const restaurants = [
         id: '53b642d7-5e86-4717-a466-0640a1dee076',
         user: 'Diana',
         text: 'Perfect Margarita',
-        rating: 5,
+        rating: 4,
       },
       {
         id: 'c27ab88e-375c-4e98-aa94-8a180150a797',

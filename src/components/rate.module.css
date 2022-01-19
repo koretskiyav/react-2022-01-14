@@ -1,0 +1,8 @@
+.iconRed path {
+  fill: red;
+}
+
+.iconWhite path {
+  stroke: black !important;
+  fill: white;
+}
