@@ -8,3 +8,8 @@
 .icon path {
   fill: red;
 }
+
+.counter {
+  margin-left: 5px;
+  margin-right: 5px;
+}
