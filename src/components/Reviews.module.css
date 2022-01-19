@@ -1,0 +1,25 @@
+.star{
+    width: 20px;
+}
+.name,
+.text{
+    padding: 0;
+    margin: 0;
+}
+.name{
+    padding-bottom: 3px;
+}
+.text{
+    display: inline-block;
+    padding-bottom: 12px;
+}
+.comment{
+    padding: 10px;
+    background-color: #eee;
+    margin-top: 10px;
+}
+.avg_title{
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding-right: 10px;
+}
