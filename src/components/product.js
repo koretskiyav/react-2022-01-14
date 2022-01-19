@@ -10,11 +10,11 @@ function Product({ product, amount, decrement, increment }) {
     <div className={styles.card}>
       <p>{product.name}</p>
       <p>{product.price} $</p>
-      <button onClick={decrement}>
+      <button className={styles.btn} onClick={decrement}>
         <Minus className={styles.icon} />
       </button>
       {amount}
-      <button onClick={increment}>
+      <button className={styles.btn} onClick={increment}>
         <Plus className={styles.icon} />
       </button>
     </div>

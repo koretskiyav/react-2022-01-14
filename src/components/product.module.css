@@ -6,6 +6,15 @@
   border-radius: 8px;
 }
 
+.btn{
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+.icon{
+  width: 70%;
+  height: 70%;
+}
 .icon path {
-  fill: red;
+  fill: rgb(0, 0, 0);
+
 }
