@@ -1,0 +1,22 @@
+.review {
+  padding: 0.5em 1em 1em;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.review:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.header {
+  display: flex;
+  font-weight: bold;
+}
+
+.header__user {
+  margin-right: 0.5em;
+}
+
+.text {
+  font-style: italic;
+}

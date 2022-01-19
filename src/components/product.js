@@ -9,11 +9,11 @@ function Product({ product, amount, decrement, increment }) {
   return (
     <div className={styles.card}>
       <p>{product.name}</p>
-      <p>{product.price} $</p>
+      <p>{product.price.toFixed(2)} $</p>
       <button onClick={decrement}>
         <Minus className={styles.icon} />
       </button>
-      {amount}
+      <span className={styles.counter}>{amount}</span>
       <button onClick={increment}>
         <Plus className={styles.icon} />
       </button>
