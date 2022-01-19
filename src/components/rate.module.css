@@ -1,0 +1,14 @@
+.rate {
+  display: flex;
+  height: 32px;
+  gap: 12px;
+}
+
+.rate__item {
+  fill: red;
+  width: 28px;
+  height: 28px;
+}
+.rate__item path {
+  fill: red;
+}

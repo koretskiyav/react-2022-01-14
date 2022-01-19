@@ -1,0 +1,10 @@
+.list {
+  display: flex;
+  gap: 12px;
+}
+
+.review {
+  padding: 4px;
+  border: 1px solid #747171;
+  border-radius: 4px;
+}
