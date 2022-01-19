@@ -7,11 +7,14 @@ export default function Rate({ value }) {
   const stars = [];
   for (let i = 1; i <= range; i++) {
     const className = value >= i ? styles.iconRed : styles.iconWhite;
-    stars.push(<Star key={i} className={ className } />);
+    const fillOpacity = value-i > 1 ? 1 : value-i;
+    stars.push(<Star key={i} 
+      className={ className } 
+      style={{fillOpacity: fillOpacity <= 0 ? 1 : fillOpacity}} />);
   }
   return (
-    <div>
-      Rating: { [...stars] }
+    <div title={"Rating: " + value}>
+      { [...stars] }
     </div>
   );
 }

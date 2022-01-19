@@ -2,17 +2,22 @@ import Reviews from './reviews';
 import Menu from './menu';
 import Rate from './rate';
 
-export default function Restaurant({ menu, reviews }) {
-  //const total = reviews.reduce((result, review) => result + review.rating, 0);
-  //console.log(total);
-  const rating = Math.round(reviews.reduce((result, review) => result + review.rating, 0) / Object.entries(reviews).length);
+export default function Restaurant({ name, menu, reviews }) {
+  const total = reviews.reduce((result, review) => result + review.rating, 0);
+  const rating = (total / Object.entries(reviews).length).toFixed(1);
+  
   return (
     <div>
-      <h2>Menu</h2>
+      <div>
+      <h1 style={{ display: 'inline-block' }}>{name}</h1> 
+      <span style={{ display: 'inline-block', paddingLeft: '5px' }}>
+        <Rate value = { rating } />
+      </span>
+      </div>      
+      <h3>Menu</h3>
       <Menu menu = { menu } />
-      <h2>Reviews</h2>
+      <h3>Reviews</h3>
       <Reviews reviews = { reviews } />
-      <Rate value = { rating } />
     </div>
   );
 }

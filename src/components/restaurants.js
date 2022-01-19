@@ -18,7 +18,7 @@ export default function Restaurants({ restaurants }) {
   return (
     <div>
       <Tabs tabs={tabs} onChange={setActiveId} />
-      <Restaurant menu={activeRestaurant.menu} reviews={activeRestaurant.reviews} />
+      <Restaurant name={activeRestaurant.name} menu={activeRestaurant.menu} reviews={activeRestaurant.reviews} />
     </div>
   );
 }
