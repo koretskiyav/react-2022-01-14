@@ -1,0 +1,9 @@
+.scored path {
+  fill: yellow;
+  stroke: black;
+}
+
+.unscored path {
+  fill: grey;
+  stroke: black;
+}
