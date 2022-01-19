@@ -1,0 +1,13 @@
+.card {
+    margin: 8px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    background: #eee;
+    border-radius: 8px;
+    width: 50%;
+}
+.card h3 {
+    margin-top: 0.2em;
+    display: inline-block;
+    margin-right: 1em;
+}

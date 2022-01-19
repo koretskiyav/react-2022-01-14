@@ -1,0 +1,12 @@
+.stars {
+    display: inline-block;
+}
+.star path {
+    fill: #d9d941;
+}
+.star polygon {
+    fill: transparent;
+}
+.fill polygon {
+    fill: #ecec46;
+}
