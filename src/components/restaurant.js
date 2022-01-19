@@ -9,7 +9,7 @@ export default function Restaurant({ menu, label, reviews }) {
     arr.forEach((el) => {
       result += el.rating;
     });
-    console.log(result / arr.length);
+
     return result / arr.length;
   };
 
