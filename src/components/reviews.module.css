@@ -1,0 +1,15 @@
+.review {
+  margin: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background: antiquewhite;
+  border-radius: 8px;
+}
+
+.average {
+  margin: 8px;
+  padding: 8px;
+  background: lavender;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
