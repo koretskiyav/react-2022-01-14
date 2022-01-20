@@ -9,3 +9,10 @@
 .icon path {
   fill: red;
 }
+
+.star{
+  background-color:#ff0;
+}
+.star path{
+  fill: #928c8c;
+}
