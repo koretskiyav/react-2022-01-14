@@ -1,0 +1,17 @@
+.reviews {
+  margin-top: 35px;
+}
+
+.review {
+  margin: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 8px;
+}
+
+.review h3 {
+  display: inline-block;
+  vertical-align: super;
+  margin-right: 20px;
+}

@@ -1,0 +1,12 @@
+.activeStar path {
+  fill: #ffd400;
+}
+
+.rate {
+  display: inline-block;
+}
+
+.rate svg {
+  width: 25px;
+  height: 25px;
+}

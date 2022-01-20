@@ -1,0 +1,5 @@
+.averageRating h4 {
+  display: inline-block;
+  vertical-align: super;
+  margin-right: 15px;
+}
