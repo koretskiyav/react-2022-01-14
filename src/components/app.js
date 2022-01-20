@@ -7,7 +7,6 @@ export default class App extends PureComponent {
     return (
       <div>
         <Restaurants restaurants={restaurants} />
-        <p>test commit</p>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import Product from './product';
+import Restaurant from './restaurant';
 
 export default function Menu({ menu }) {
   return (
