@@ -1,0 +1,17 @@
+.rate {
+  display: flex;
+  gap: 5px;
+}
+
+.rate__icon {
+  display: inline-block;
+}
+
+.rate__icon path {
+  fill: white;
+  stroke: orange;
+}
+
+.rate__iconActive path {
+  fill: orange;
+}

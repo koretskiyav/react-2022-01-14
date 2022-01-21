@@ -1,0 +1,20 @@
+.restaurant {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid gray;
+  margin: 30px 0;
+  border-radius: 15px;
+}
+
+.restaurant__reviewTitle {
+  margin-top: 0;
+  font-size: 25px;
+}
+
+.restaurant__review {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
