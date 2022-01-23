@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-
+import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
 
@@ -23,3 +23,28 @@ export default function Restaurants({ restaurants }) {
     </div>
   );
 }
+
+Restaurant.propTypes = {
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      menu: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+          price: PropTypes.number,
+          ingrediens: PropTypes.arrayOf(PropTypes.string),
+        })
+      ),
+      reviews: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          user: PropTypes.string,
+          test: PropTypes.string,
+          rating: PropTypes.number,
+        })
+      ),
+    })
+  ),
+};
