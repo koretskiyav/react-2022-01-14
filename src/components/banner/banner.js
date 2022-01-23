@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import styles from './banner.module.css';
 
 import banner from './banner.jpg';

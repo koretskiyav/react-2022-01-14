@@ -1,6 +1,7 @@
 import { PureComponent } from 'react';
 import Restaurants from '../restaurants';
 import Header from '../header';
+import PropTypes from 'prop-types';
 
 export default class App extends PureComponent {
   render() {
@@ -16,5 +17,5 @@ export default class App extends PureComponent {
 }
 
 App.propTypes = {
-    restaurants: PropTypes.arrayOf(PropTypes.object).isRequired,
+    restaurants: PropTypes.arrayOf(PropTypes.object),
 };
