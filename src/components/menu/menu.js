@@ -7,9 +7,9 @@ import styles from './menu.module.css';
 class Menu extends Component {
   static propTypes = {
     menu: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+        }).isRequired
     ).isRequired,
   };
 
@@ -30,7 +30,7 @@ class Menu extends Component {
       <div className={styles.menu}>
         <div>
           {menu.map((product) => (
-            <Product key={product.id} product={product} />
+            <Product key={product.id} product={product}/>
           ))}
         </div>
       </div>
