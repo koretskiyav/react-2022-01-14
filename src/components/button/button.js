@@ -17,4 +17,9 @@ const Button = ({ icon, ...props }) => {
   );
 };
 
+Button.propTypes = {
+  icon: PropTypes.string,
+  props: PropTypes.array
+};
+
 export default Button;

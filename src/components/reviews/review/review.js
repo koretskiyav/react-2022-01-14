@@ -19,4 +19,10 @@ Review.defaultProps = {
   user: 'Anonymous',
 };
 
+Product.propTypes = {
+  user: PropTypes.string,
+  text: PropTypes.string,
+  rating: PropTypes.number
+};
+
 export default Review;

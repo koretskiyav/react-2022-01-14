@@ -12,4 +12,9 @@ const Banner = ({ heading, children }) => (
   </div>
 );
 
+Banner.propTypes = {
+  heading: PropTypes.string,
+  children: PropTypes.object
+};
+
 export default Banner;

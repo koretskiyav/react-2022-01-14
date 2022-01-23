@@ -14,3 +14,7 @@ export default class App extends PureComponent {
     );
   }
 }
+
+App.propTypes = {
+    restaurants: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

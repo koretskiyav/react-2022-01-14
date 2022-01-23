@@ -15,4 +15,8 @@ const Rate = ({ value }) => (
   </div>
 );
 
+Rate.propTypes = {
+  value: PropTypes.number.isRequired
+};
+
 export default Rate;

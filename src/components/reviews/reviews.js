@@ -11,4 +11,10 @@ const Reviews = ({ reviews }) => {
   );
 };
 
+Product.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.PropTypes.shape({
+    id: PropTypes.number.isRequired
+  })).isRequired
+};
+
 export default Reviews;
