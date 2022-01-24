@@ -31,3 +31,21 @@ describe('Product', () => {
     expect(fn).toBeCalledWith(product.id);
   });
 });
+
+/*describe('DecrementAmountTests', () => {
+  it('increment of 5 should be 4', () => {
+    const context = { amount: 5 };
+    const wrapper = mount(<Product product={product} />, { context });
+    wrapper.find('button[data-id="product-decrement"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('4')
+  })
+})*/
+
+describe('DecrementAmountTests', () => {
+  it('increment of 5 should be 4', () => {
+    const wrapper = mount(<Product product={product} />);
+    wrapper.setProps({ amount: 5 })
+    wrapper.find('button[data-id="product-decrement"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('4')
+  })
+})
