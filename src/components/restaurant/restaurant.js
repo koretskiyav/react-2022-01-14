@@ -3,6 +3,7 @@ import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
+import PropTypes from 'prop-types';
 import styles from './restaurant.module.css';
 
 const Restaurant = ({ restaurant }) => {
@@ -16,7 +17,7 @@ const Restaurant = ({ restaurant }) => {
   return (
     <div>
       <Banner heading={name}>
-        <Rate value={averageRating} />
+        <Rate value={averageRating}/>
       </Banner>
       <div className={styles.restaurant}>
         <Menu key={id} menu={menu} />
@@ -24,6 +25,15 @@ const Restaurant = ({ restaurant }) => {
       </div>
     </div>
   );
+};
+
+Restaurant.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  menu: PropTypes.arrayOf(PropTypes.object),
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    rating: PropTypes.number
+  })),
 };
 
 export default Restaurant;

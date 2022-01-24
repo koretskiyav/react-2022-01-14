@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0f681569-633b-41d4-a59d-90b1e0a090dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/banner/banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/banner/banner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/button/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button/button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product/product.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/product.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rate/rate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rate/rate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/restaurant/restaurant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurant/restaurant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/restaurants/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurants/restaurants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviews/review/review.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/review/review.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviews/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/reviews.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="246Did05i0LgSjAJ6Ghg5H9oXGO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../js-20211109_dvpashnev" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f681569-633b-41d4-a59d-90b1e0a090dc" name="Changes" comment="" />
+      <created>1642942282641</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642942282641</updated>
+      <workItem from="1642942287482" duration="23000" />
+    </task>
+    <servers />
+  </component>
+</project>
