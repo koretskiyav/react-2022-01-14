@@ -1,4 +1,6 @@
-import { ReactComponent as Star } from '../icons/ratingStar.svg';
+import PropTypes from 'prop-types';
+
+import { ReactComponent as Star } from '../../icons/ratingStar.svg';
 
 export default function Rate({ value }) {
   const stars = [];
@@ -8,3 +10,7 @@ export default function Rate({ value }) {
 
   return <div>{stars}</div>;
 }
+
+Rate.propTypes = {
+  value: PropTypes.number.isRequired,
+};
