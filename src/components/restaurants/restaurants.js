@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 
 import Restaurant from '../restaurant';
@@ -23,3 +24,10 @@ export default function Restaurants({ restaurants }) {
     </div>
   );
 }
+
+Restaurants.propTypes = {
+  restaurants: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.string.isRequired,
+    name: propTypes.string.isRequired
+  }).isRequired).isRequired
+};
