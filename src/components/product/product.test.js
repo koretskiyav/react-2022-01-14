@@ -1,4 +1,4 @@
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import Product from './product';
@@ -29,5 +29,13 @@ describe('Product', () => {
     const fn = jest.fn();
     mount(<Product product={product} fetchData={fn} />);
     expect(fn).toBeCalledWith(product.id);
+  });
+
+  it('should decrement amount', () => {
+    const wrapper = shallow(<Product product={product}/>);
+    wrapper.props().increment()
+    wrapper.props().increment()
+    wrapper.props().decrement()
+    expect(wrapper.props().amount).toBe(1);
   });
 });
