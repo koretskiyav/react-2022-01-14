@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import cn from 'classnames';
 
 import styles from './tabs.module.css';
@@ -16,4 +18,15 @@ export default function Tabs({ tabs, activeId, onChange }) {
       ))}
     </div>
   );
+}
+
+Tabs.propTypes = {
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape( {
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string,
+    }).isRequired,
+  ).isRequired,
+  activeId: PropTypes.string,
+  onChange: PropTypes.func,
 }
