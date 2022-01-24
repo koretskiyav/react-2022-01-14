@@ -25,6 +25,18 @@ describe('Product', () => {
     expect(wrapper.find('[data-id="product-amount"]').text()).toBe('1');
   });
 
+  it('should excrement amount', () => {
+    const wrapper = mount(<Product product={product} />);
+    wrapper.find('button[data-id="product-excrement"]').invoke('onClick')();
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
+  });
+
+  it('should remain to be zero after being excremented from zero', () => {
+    const wrapper = mount(<Product product={product} />);
+    wrapper.find('button[data-id="product-excrement"]').invoke('onClick')();
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
+  });
+
   it('should fetch data', () => {
     const fn = jest.fn();
     mount(<Product product={product} fetchData={fn} />);
