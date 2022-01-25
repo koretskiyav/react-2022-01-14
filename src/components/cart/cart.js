@@ -9,13 +9,18 @@ import CartItem from './cartItem';
 import styles from './cart.module.css';
 
 const Cart = ({products, order, decrement, increment, remove}) => {
-    const productsInCart = useMemo(
-        () => Object.entries(order)
-            .map(([productId, amount,]) => ({
-                ...products[productId],
-                amount,
-            }))
-            .filter(product => product && product.amount),
+    const {productsInCart, total,} = useMemo(
+        () => {
+            const productsInCart = Object.entries(order)
+                .map(([productId, amount,]) => ({
+                    ...products[productId],
+                    amount,
+                }))
+                .filter(product => product && product.amount);
+            const total = productsInCart.reduce((acc, {price, amount,}) => acc + price * amount, 0);
+
+            return {productsInCart, total,};
+        },
         [products, order]
     );
 
@@ -35,12 +40,16 @@ const Cart = ({products, order, decrement, increment, remove}) => {
                               remove={remove}/>
                 ))
             }
+            <div className={styles.summary}>
+                <p className={styles.summaryTitle}>Total:</p>
+                <p className={styles.summaryTotal}>{total} $</p>
+            </div>
         </section>
     );
 };
 
 Cart.propTypes = {
-    products: PropTypes.objectOf(function(propValue, key, componentName, location, propFullName) {
+    products: PropTypes.objectOf(function (propValue, key, componentName, location, propFullName) {
         if (typeof key !== 'string') {
             return new Error(`[Component:'${componentName}'] each key of products prop entry must be a string`);
         }
@@ -50,10 +59,18 @@ Cart.propTypes = {
         }
 
         if (!propValue[key].id || typeof propValue[key].id !== 'string') {
-            return new Error(`[Component:'${componentName}'] each entry in products prop must have a string key "id"`);
+            return new Error(
+                `[Component:'${componentName}'] each entry in products prop
+                must have a key "id" with according string value`);
+        }
+
+        if (!propValue[key].price || typeof propValue[key].price !== 'number') {
+            return new Error(
+                `[Component:'${componentName}'] each entry in products prop
+                must have a key "price" with according number value`);
         }
     }),
-    order: PropTypes.objectOf(function(propValue, key, componentName, location, propFullName) {
+    order:    PropTypes.objectOf(function (propValue, key, componentName, location, propFullName) {
         if (typeof key !== 'string') {
             return new Error(`[Component:'${componentName}'] each key of order prop entry must be a string`);
         }
