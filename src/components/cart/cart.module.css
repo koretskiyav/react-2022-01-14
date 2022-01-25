@@ -1,0 +1,11 @@
+.cart {
+    margin: 0;
+    padding: 0 26px;
+}
+
+.heading {
+    color: #333;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 150%;
+}
