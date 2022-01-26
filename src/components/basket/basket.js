@@ -1,11 +1,11 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Item from '../item';
 
 import styles from './basket.module.css';
 
-class Basket extends Component {
+class Basket extends PureComponent {
   static propTypes = {
     list: PropTypes.arrayOf(
       PropTypes.shape({
