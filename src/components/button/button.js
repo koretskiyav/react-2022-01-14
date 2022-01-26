@@ -4,10 +4,12 @@ import styles from './button.module.css';
 
 import { ReactComponent as PlusIcon } from '../../icons/plus.svg';
 import { ReactComponent as MinusIcon } from '../../icons/minus.svg';
+import { ReactComponent as CloseIcon } from '../../icons/close.svg';
 
 const icons = {
   plus: PlusIcon,
   minus: MinusIcon,
+  close: CloseIcon,
 };
 
 const Button = ({ icon, ...props }) => {
