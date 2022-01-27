@@ -4,6 +4,7 @@ import { decrement, increment, drop } from '../../redux/actions';
 import BasketItem from './basketItem';
 import Banner from '../banner';
 import styles from './basket.module.css';
+import PropTypes from 'prop-types';
 
 function Basket({ allProducts, selectedProducts, increment, decrement, drop }) {
   const totalCost = useMemo(
@@ -38,6 +39,26 @@ function Basket({ allProducts, selectedProducts, increment, decrement, drop }) {
     </div>
   );
 }
+
+Basket.propTypes = {
+  allProducts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+    })
+  ),
+  selectedProducts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+      name: PropTypes.string,
+      price: PropTypes.number.isRequired,
+    })
+  ),
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+  drop: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state, props) => {
   const selectedProductsIds = Object.entries(state.order)

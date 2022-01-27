@@ -1,13 +1,7 @@
 import Button from '../../button';
+import PropTypes from 'prop-types';
 
-export default function BasketItem({
-  name,
-  price,
-  amount,
-  increment,
-  decrement,
-  drop,
-}) {
+function BasketItem({ name, price, amount, increment, decrement, drop }) {
   return (
     <div>
       <h5>{name}</h5>
@@ -21,3 +15,14 @@ export default function BasketItem({
     </div>
   );
 }
+
+BasketItem.propTypes = {
+  amount: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  price: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+  drop: PropTypes.func.isRequired,
+};
+
+export default BasketItem;
