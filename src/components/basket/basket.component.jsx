@@ -5,6 +5,7 @@ import style from './basket.module.css';
 
 const Basket = ({order}) => {
   const items = useMemo(() => Object.entries(order), [order]);
+  const total = useMemo(()=> items.reduce((total, [, {price, amount}]) => total + price * amount, 0), [items]);
 
   return (
     <div className={style.basket}>
@@ -14,19 +15,10 @@ const Basket = ({order}) => {
         : <div className={style.empty}>cart is empty</div>
       }
 
-      {
-        !!items.length &&
-        <div className={style.total}>
-          Total: { items.reduce((total, [, {price, amount}]) => total + price * amount, 0) } $
-        </div>
-      }
+      {!!items.length && <div className={style.total}>Total: {total} $</div>}
 
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  order: state.order
-})
-
-export default connect(mapStateToProps)(Basket);
+export default connect(({order}) => ({order}))(Basket);

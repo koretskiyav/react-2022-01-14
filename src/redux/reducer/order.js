@@ -14,8 +14,8 @@ const addItem = (state, {id, ...otherProps}) => {
 const removeItem = (state, id) => {
   if (!state[id]) return state;
 
-  // if (state[id].amount === 1) return clearItem(state, id);
-  if (state[id].amount < 1) return {...state, [id]:{...state[id], amount: 0}}; // вариант 2(без удаления)
+  if (state[id].amount === 1) return clearItem(state, id);
+  // if (state[id].amount < 1) return {...state, [id]:{...state[id], amount: 0}}; // вариант 2(без удаления)
   
   return {...state, [id]:{...state[id], amount: state[id].amount - 1}};
 };
