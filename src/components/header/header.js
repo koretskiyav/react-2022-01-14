@@ -1,10 +1,18 @@
-import { ReactComponent as Logo } from '../../icons/logo.svg';
-import styles from './header.module.css';
+import { connect } from 'react-redux';
 
-const Header = () => (
+import { ReactComponent as Logo } from '../../icons/logo.svg';
+import { ReactComponent as BasketIcon } from '../../icons/basket.svg';
+import styles from './header.module.css';
+import { show } from '../../redux/actions';
+
+const Header = ({showBasket}) => (
   <header className={styles.header}>
     <Logo />
+    <BasketIcon className={styles.basket} onClick={showBasket}/>
   </header>
 );
 
-export default Header;
+const mapDispatchToProps = { showBasket: show }
+const _ = null
+
+export default connect(_, mapDispatchToProps)(Header); //eslint-disable-line

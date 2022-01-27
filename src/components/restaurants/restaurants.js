@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
+import Basket from '../basket';
 import Tabs from '../tabs';
 
 function Restaurants({ restaurants }) {
@@ -20,6 +21,7 @@ function Restaurants({ restaurants }) {
     <div>
       <Tabs tabs={tabs} onChange={setActiveId} activeId={activeId} />
       <Restaurant restaurant={activeRestaurant} />
+      <Basket restaurants={restaurants} />
     </div>
   );
 }
