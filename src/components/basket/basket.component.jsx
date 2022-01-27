@@ -17,7 +17,7 @@ const Basket = ({order}) => {
       {
         !!items.length &&
         <div className={style.total}>
-          Total: {items.map(item => item[1].price * item[1].amount)} $
+          Total: { items.reduce((total, [, {price, amount}]) => total + price * amount, 0) } $
         </div>
       }
 

@@ -8,10 +8,7 @@ const clearItem = (state, id) => {
 
 const addItem = (state, {id, ...otherProps}) => {
   if (!state[id]) return {...state, [id]:{amount: 1, ...otherProps}};
-
-  const newstate = {...state};
-  newstate[id].amount = state[id].amount + 1;
-  return newstate;
+  return {...state, [id]:{...state[id], amount: state[id].amount + 1}};
 };
 
 const removeItem = (state, id) => {
