@@ -1,0 +1,43 @@
+.product {
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr auto minmax(auto, 80px) repeat(2, minmax(auto, 100px)) 20px;
+  align-items: center;
+}
+
+.product div {
+  justify-self: center;
+}
+
+.product p {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.content {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--yellow);
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons button {
+  width: 25px;
+  height: 25px;
+}
+
+.remove {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

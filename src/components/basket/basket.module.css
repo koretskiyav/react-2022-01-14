@@ -1,0 +1,27 @@
+.basket {
+  padding: 20px 26px;
+
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  margin-bottom: 100px;
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--grey);
+}
+
+.total {
+  margin-top: 30px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.empty {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+}
