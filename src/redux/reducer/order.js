@@ -14,12 +14,12 @@ const addItem = (state, {id, ...otherProps}) => {
 const removeItem = (state, id) => {
   if (!state[id]) return state;
 
-  if (state[id].amount === 1) return {...state, [id]:{...state[id], amount: 0}};
+  // if (state[id].amount === 1) return clearItem(state, id);
+  if (state[id].amount < 1) return {...state, [id]:{...state[id], amount: 0}}; // вариант 2(без удаления)
   
   return {...state, [id]:{...state[id], amount: state[id].amount - 1}};
 };
 
-// if (state[id].amount === 1) return clearItem(state, id);
 export default function (state = {}, action) {
   const { type, payload} = action;
   switch (type) {
