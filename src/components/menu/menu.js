@@ -31,7 +31,7 @@ class Menu extends Component {
       <div className={styles.menu}>
         <div>
           {menu.map((product) => (
-            <Product key={product.id} product={product} />
+            <Product key={product.id} product={{ ...product, amount: 2 }} />
           ))}
         </div>
       </div>

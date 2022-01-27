@@ -1,8 +1,11 @@
 import { useMemo } from 'react';
 import { connect } from 'react-redux';
+import { decrement, increment, drop } from '../../redux/actions';
+import BasketItem from './basketItem';
 import Banner from '../banner';
+import styles from './basket.module.css';
 
-function Basket({ allProducts, selectedProducts }) {
+function Basket({ allProducts, selectedProducts, increment, decrement, drop }) {
   const totalCost = useMemo(
     () =>
       selectedProducts.reduce(
@@ -15,17 +18,23 @@ function Basket({ allProducts, selectedProducts }) {
   return (
     <div>
       <Banner heading="Basket" />
-      <ul>
-        {selectedProducts.map(({ id, name, amount, price }) => (
-          <li key={id}>
-            <h5>{name}</h5>
-            <p>Count: {amount}</p>
-            <p>Price: {price}</p>
-            <p>Cost: {amount * price}$</p>
-          </li>
-        ))}
-      </ul>
-      <h5>Total: {totalCost}$</h5>
+      <div className={styles.basket}>
+        <ul>
+          {selectedProducts.map(({ id, name, amount, price }) => (
+            <li key={id}>
+              <BasketItem
+                name={name}
+                amount={amount}
+                price={price}
+                increment={() => increment(id)}
+                decrement={() => decrement(id)}
+                drop={() => drop(id)}
+              />
+            </li>
+          ))}
+        </ul>
+        <h5>Total: {totalCost}$</h5>
+      </div>
     </div>
   );
 }
@@ -47,4 +56,10 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(Basket);
+const mapDispatchToProps = (dispatch, props) => ({
+  decrement: (id) => dispatch(decrement(id)),
+  increment: (id) => dispatch(increment(id)),
+  drop: (id) => dispatch(drop(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);
