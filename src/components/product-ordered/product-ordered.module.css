@@ -1,0 +1,14 @@
+.product {
+  display: grid;
+  grid-template-columns: 200px 50px 50px 50px 50px 50px;
+}
+
+.count {
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.cost {
+  padding-top: 15px;
+  font-weight: bold;
+}
