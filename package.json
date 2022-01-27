@@ -8,7 +8,9 @@
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0"
+    "react-redux": "^7.2.6",
+    "react-scripts": "5.0.0",
+    "redux": "^4.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,7 +24,9 @@
       "react-app/jest"
     ],
     "rules": {
-      "import/no-anonymous-default-export": 0
+      "import/no-anonymous-default-export": 0,
+      "testing-library/no-render-in-setup": 0,
+      "testing-library/render-result-naming-convention": 0
     }
   },
   "browserslist": {
