@@ -1,13 +1,23 @@
 import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import Basket from '../basket';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
 
 function Restaurants({ restaurants }) {
   const [activeId, setActiveId] = useState(restaurants[0].id);
 
+  const allProducts = useMemo(
+    () =>
+      restaurants.reduce((products, rest) => [...products, ...rest.menu], []),
+    [restaurants]
+  );
+
   const tabs = useMemo(
-    () => restaurants.map(({ id, name }) => ({ id, label: name })),
+    () => [
+      ...restaurants.map(({ id, name }) => ({ id, label: name })),
+      { id: 'basket', label: 'Basket' },
+    ],
     [restaurants]
   );
 
@@ -19,7 +29,11 @@ function Restaurants({ restaurants }) {
   return (
     <div>
       <Tabs tabs={tabs} onChange={setActiveId} activeId={activeId} />
-      <Restaurant restaurant={activeRestaurant} />
+      {activeId !== 'basket' ? (
+        <Restaurant restaurant={activeRestaurant} />
+      ) : (
+        <Basket allProducts={allProducts} />
+      )}
     </div>
   );
 }
