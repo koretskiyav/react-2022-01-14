@@ -1,0 +1,10 @@
+.basket {
+    margin: 0 auto;
+    padding: 12px;
+    max-width: 884px;
+    width: 100%;
+    border: 1px solid var(--grey);
+    background-color: var(--white);
+    color: var(--black);
+    transition: 0.2s all;
+}
