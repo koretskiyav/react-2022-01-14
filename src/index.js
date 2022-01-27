@@ -11,7 +11,7 @@ window.store = store;
 
 ReactDOM.render(
   <Provider store={store}>
-    <App restaurants={restaurants} />
+    <App restaurants={restaurants} store={store}/>
   </Provider>,
   document.getElementById('root')
 );
