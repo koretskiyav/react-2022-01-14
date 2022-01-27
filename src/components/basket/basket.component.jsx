@@ -1,9 +1,10 @@
+import { useMemo } from 'react';
 import {connect} from 'react-redux';
 import BasketItem from '../basketItem/basketItem.component';
 import style from './basket.module.css';
 
 const Basket = ({order}) => {
-  const items = Object.entries(order);
+  const items = useMemo(() => Object.entries(order), [order]);
 
   return (
     <div className={style.basket}>
