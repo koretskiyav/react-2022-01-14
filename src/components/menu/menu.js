@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Product from '../product';
 
@@ -23,6 +24,8 @@ class Menu extends Component {
   render() {
     const { menu } = this.props;
 
+    this.props.dispatch({ type: 'ADDMENU', menu: menu });
+
     if (this.state.error) {
       return <p>Меню этого ресторана сейчас недоступно :(</p>;
     }
@@ -39,4 +42,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default connect()(Menu);
