@@ -1,2 +1,3 @@
 export const DECREMENT = 'DECREMENT';
 export const INCREMENT = 'INCREMENT';
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
