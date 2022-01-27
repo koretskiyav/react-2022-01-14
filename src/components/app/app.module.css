@@ -1,0 +1,53 @@
+.icon {
+  color: var(--white);
+  background-color: var(--yellow);
+  border: 1px solid var(--yellow);
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 14px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: 0.2s all;
+  text-transform: uppercase;
+  position:absolute;
+  top:10px;
+  right:10px;
+}
+
+.icon svg {
+  width: 20px;
+  height: 22px;
+}
+
+.icon:hover,
+.icon:focus,
+.icon:active {
+  border-color: var(--yellow-light);
+  background-color: var(--yellow-light);
+}
+
+.icon + icon {
+  margin-left: 1px;
+}
+
+.basketClosed {
+  display: none;
+}
+
+.basketOpened {
+  display: initial;
+}
+
+.count {
+  position:absolute;
+  top:0px;
+  right:0px;
+}

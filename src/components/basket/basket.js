@@ -1,17 +1,18 @@
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Item from '../item';
 
 import styles from './basket.module.css';
 
-class Basket extends PureComponent {
+class Basket extends Component {
   static propTypes = {
     list: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired,
+    total: PropTypes.number
   };
 
   state = { error: null };
@@ -21,18 +22,24 @@ class Basket extends PureComponent {
   }
 
   render() {
-    const { list } = this.props;
+    const { list, total } = this.props;
 
     if (this.state.error) {
-      return <p>Меню этого ресторана сейчас недоступно :(</p>;
+      return <p>Корзина сейчас недоступна :(</p>;
     }
     
     return (
-      <div className={styles.list}>
+      <div className={styles.basket}>
+        <h2 className={styles.header}>Your order</h2>
+        <div className={styles.list}>
+          <div>
+            {list.map((product) => (
+              <Item key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
         <div>
-          {list.map((product) => (
-            <Item key={product.id} product={product} />
-          ))}
+          <h3 className={styles.total}>Total: {total} $</h3>
         </div>
       </div>
     );

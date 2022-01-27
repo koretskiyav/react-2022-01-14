@@ -1,3 +1,7 @@
+.header {
+  text-align: center;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -27,4 +31,9 @@
   .list > * {
     padding: 0 12px;
   }
+}
+
+.total {
+  float: right;
+  padding: 0 12px;
 }

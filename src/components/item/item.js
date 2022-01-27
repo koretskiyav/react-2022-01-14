@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './item.module.css';
@@ -11,7 +12,10 @@ function Item({ product, amount, decrement, increment, removing, fetchData }) {
     fetchData?.(product.id);
   }, []); // eslint-disable-line
 
-  const sum = amount * product.price;
+  const sum = useMemo(
+    () => amount * product.price,
+    [amount, product]
+  );
 
   return (
     <div className={styles.item} data-id="item">
@@ -23,11 +27,11 @@ function Item({ product, amount, decrement, increment, removing, fetchData }) {
         <div>
           <div className={styles.counter}>
             <div className={styles.count} data-id="product-amount">
-              {amount}
+              {amount} (<span className={styles.sum} data-id="item-sum">
+                {sum} $
+              </span>)
             </div>
-            <div className={styles.sum} data-id="item-sum">
-              {sum}
-            </div>
+            
             <div className={styles.buttons}>
               <Button
                 onClick={decrement}
@@ -55,8 +59,7 @@ function Item({ product, amount, decrement, increment, removing, fetchData }) {
 Item.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string,
-    price: PropTypes.number,
-    ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    price: PropTypes.number
   }).isRequired,
   fetchData: PropTypes.func,
   // from HOC counter
