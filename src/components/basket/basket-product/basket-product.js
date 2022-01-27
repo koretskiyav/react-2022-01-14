@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import styles from './product.module.css';
-import Button from '../button';
-import { decrement, increment } from '../../redux/actions';
+import styles from './basket-product.module.css';
+import Button from '../../button';
+import { decrement, increment, remove } from '../../../redux/actions';
 
-function Product({ product, order, decrement, increment, fetchData }) {
+function BasketProduct({ product, order, decrement, increment, remove, fetchData }) {
   useEffect(() => {
     fetchData?.(product.id);
   }, []); // eslint-disable-line
@@ -17,7 +17,7 @@ function Product({ product, order, decrement, increment, fetchData }) {
         <div>
           <h4 className={styles.title}>{product.name}</h4>
           <p className={styles.description}>{product.ingredients.join(', ')}</p>
-          <div className={styles.price}>{product.price} $</div>
+          <div className={styles.price}>{product.price * order.amount} $</div>
         </div>
         <div>
           <div className={styles.counter}>
@@ -35,6 +35,11 @@ function Product({ product, order, decrement, increment, fetchData }) {
                 data-id="product-increment"
                 icon="plus"
               />
+              <Button
+                onClick={remove}
+                data-id="product-delete"
+                icon="plus"
+              />
             </div>
           </div>
         </div>
@@ -43,7 +48,7 @@ function Product({ product, order, decrement, increment, fetchData }) {
   );
 }
 
-Product.propTypes = {
+BasketProduct.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string,
     price: PropTypes.number,
@@ -60,14 +65,10 @@ const mapStateToProps = (state, props) => ({
   order: state.order[props.product.id] || 0,
 });
 
-// const mapDispatchToProps = {
-//   decrement,
-//   increment,
-// };
-
 const mapDispatchToProps = (dispatch, props) => ({
   decrement: () => dispatch(decrement(props.product)),
   increment: () => dispatch(increment(props.product)),
+  remove: () => dispatch(remove(props.product))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(BasketProduct);

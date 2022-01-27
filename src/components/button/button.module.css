@@ -29,3 +29,7 @@
 .button + button {
   margin-left: 1px;
 }
+
+[data-id="product-delete"] svg {
+  transform: rotate(45deg);
+}
