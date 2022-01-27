@@ -29,3 +29,7 @@
 .button + button {
   margin-left: 1px;
 }
+
+.button svg {
+  width: 100%;
+}
