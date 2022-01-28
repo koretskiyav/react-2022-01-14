@@ -3,6 +3,7 @@
   text-align: center;
   padding: 12px;
   background-color: var(--grey);
+  width: 100%;
 }
 
 .tabs span {

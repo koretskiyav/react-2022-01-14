@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT } from './constants';
+import {DECREMENT, DEL_ITEM, INCREMENT} from './constants';
 
 // { [productId]: amount }
 export default function (state = {}, action) {
@@ -7,7 +7,10 @@ export default function (state = {}, action) {
     case INCREMENT:
       return { ...state, [id]: (state[id] || 0) + 1 };
     case DECREMENT:
-      return { ...state, [id]: (state[id] || 0) - 1 };
+      const count = (state[id] || 0) - 1;
+      return { ...state, [id]: count < 0 ? 0 : count };
+    case DEL_ITEM:
+      return { ...state, [id]: 0 };
     default:
       return state;
   }
