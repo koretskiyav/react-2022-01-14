@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
-import Tabs from '../tabs';
+import Navigation from "../navigation";
+import Basket from "../basket";
+import {BASKET_TABS} from "../navigation/navigation";
 
 function Restaurants({ restaurants }) {
   const [activeId, setActiveId] = useState(restaurants[0].id);
@@ -16,10 +18,14 @@ function Restaurants({ restaurants }) {
     [activeId, restaurants]
   );
 
+  const mainApp = (activeId === BASKET_TABS) ?
+      <Basket restaurants={restaurants}/> :
+      <Restaurant restaurant={activeRestaurant} />;
+
   return (
     <div>
-      <Tabs tabs={tabs} onChange={setActiveId} activeId={activeId} />
-      <Restaurant restaurant={activeRestaurant} />
+        <Navigation tabs={tabs} onChangeTabs={setActiveId} activeId={activeId}/>
+        {mainApp}
     </div>
   );
 }
