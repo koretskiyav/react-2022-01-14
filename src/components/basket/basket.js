@@ -20,7 +20,7 @@ const Basket = ({ restaurants, basket }) => {
         </div>
         <div>
           {productOrder.map((product) => {
-            return <Product product={product} />;
+            return <Product key={product.id} product={product} />;
           })}
         </div>
       </div>
