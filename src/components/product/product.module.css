@@ -1,4 +1,5 @@
 .product {
+  position: relative;
   padding: 20px 26px;
   margin-bottom: 12px;
   border: 1px solid var(--grey);
@@ -68,6 +69,15 @@
   justify-content: space-between;
   align-items: center;
   width: auto;
+}
+
+.reset{
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 @media all and (max-width: 767px) {
