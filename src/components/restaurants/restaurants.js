@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
+import { restaurantsSelector } from '../../redux/selectors';
 
 function Restaurants({ restaurants }) {
   const restaurantsIdList = useMemo(
@@ -45,7 +46,7 @@ Restaurants.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { restaurants: state.restaurants };
+  return { restaurants: restaurantsSelector(state) };
 };
 
 export default connect(mapStateToProps)(Restaurants);
