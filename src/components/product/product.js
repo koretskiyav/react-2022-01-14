@@ -50,14 +50,15 @@ Product.propTypes = {
     ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }).isRequired,
   fetchData: PropTypes.func,
-  // from HOC counter
+  // from connect
   amount: PropTypes.number,
   decrement: PropTypes.func,
   increment: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => ({
-  amount: state.order[props.product.id] || 0,
+  amount: state.order[props.id] || 0,
+  product: state.products[props.id],
 });
 
 // const mapDispatchToProps = {
@@ -66,8 +67,8 @@ const mapStateToProps = (state, props) => ({
 // };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  decrement: () => dispatch(decrement(props.product.id)),
-  increment: () => dispatch(increment(props.product.id)),
+  decrement: () => dispatch(decrement(props.id)),
+  increment: () => dispatch(increment(props.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
