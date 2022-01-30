@@ -23,7 +23,7 @@ class Menu extends Component {
     if (this.state.error) {
       return <p>Меню этого ресторана сейчас недоступно :(</p>;
     }
-    console.log('MENU')
+
 
     return (
       <div className={styles.menu}>
