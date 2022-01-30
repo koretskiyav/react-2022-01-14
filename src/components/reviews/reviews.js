@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 
 const Reviews = ({ reviews, restaurantId }) => {
   const reviewsArray = Object.values(reviews)
-  console.log('REVIEWS')
+
   return (
     <div className={styles.reviews}>
       {reviewsArray.map((review) => (
