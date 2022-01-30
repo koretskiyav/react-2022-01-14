@@ -5,8 +5,11 @@ import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
+import {connect} from "react-redux";
+import {obsSelector} from "../../redux/selectors";
 
-const Restaurant = ({ restaurant }) => {
+const Restaurant = ({ restaurant, stateObs }) => {
+
   const { id, name, menu, reviews } = restaurant;
 
   const [activeTab, setActiveTab] = useState('menu');
@@ -27,8 +30,8 @@ const Restaurant = ({ restaurant }) => {
         <Rate value={averageRating} />
       </Banner>
       <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
-      {activeTab === 'menu' && <Menu menu={menu} key={id} />}
-      {activeTab === 'reviews' && <Reviews reviews={reviews} />}
+      {activeTab === 'menu' && <Menu menu={menu} key={id} restaurantId={id}/>}
+      {activeTab === 'reviews' && <Reviews restaurantId={id} key={stateObs}/>}
     </div>
   );
 };
@@ -38,12 +41,12 @@ Restaurant.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
     menu: PropTypes.array,
-    reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        rating: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
+    reviews: PropTypes.array,
   }).isRequired,
 };
 
-export default Restaurant;
+
+const mapStateToProps = (state) => ({
+  stateObs: obsSelector(state)
+})
+export default connect(mapStateToProps)(Restaurant);

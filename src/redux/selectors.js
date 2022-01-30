@@ -22,3 +22,10 @@ export const totalSelector = createSelector(
   (orderProducts) =>
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
 );
+
+const lastCommentSelector = (state) => state.lastComment
+
+export const obsSelector = createSelector(
+  [lastCommentSelector],
+  (lastComment) => lastComment.id
+)
