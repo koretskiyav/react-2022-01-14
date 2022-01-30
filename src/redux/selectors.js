@@ -57,9 +57,32 @@ export const userSelector = createSelector(
   }
 );
 
+export const restaurantSelector = createSelector(
+  [restaurantsSelector, (state, id) => id],
+  (restaurants, id) => {
+    return restaurants[id];
+  }
+);
+
 export const reviewSelector = createSelector(
   [reviewsSelector, (state, id) => id],
   (reviews, id) => {
     return reviews[id];
+  }
+);
+
+export const reviewsForRestaurantSelector = createSelector(
+  [reviewsSelector, restaurantsSelector, (state, restaurantId) => restaurantId],
+  (reviews, restaurants, restaurantId) => {
+    const restaurant = restaurants[restaurantId];
+    return Object.keys(reviews).filter((key) => restaurant.reviews.includes(key));
+  }
+);
+
+export const menuForRestaurantSelector = createSelector(
+  [productsSelector, restaurantsSelector, (state, restaurantId) => restaurantId],
+  (products, restaurants, restaurantId) => {
+    const restaurant = restaurants[restaurantId];
+    return Object.keys(products).filter((key) => restaurant.menu.includes(key));
   }
 );

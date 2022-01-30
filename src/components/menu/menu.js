@@ -1,10 +1,13 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Product from '../product';
 import Basket from '../basket';
 
 import styles from './menu.module.css';
+
+import { menuForRestaurantSelector } from '../../redux/selectors';
 
 class Menu extends Component {
   static propTypes = {
@@ -18,7 +21,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { menu } = this.props;
+    const { restaurantId, menu } = this.props;
 
     if (this.state.error) {
       return <p>Меню этого ресторана сейчас недоступно :(</p>;
@@ -39,4 +42,8 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+const mapStateToProps = (state, ownProps) => ({
+  menu: menuForRestaurantSelector(state, ownProps.restaurantId),
+});
+
+export default connect(mapStateToProps)(Menu);

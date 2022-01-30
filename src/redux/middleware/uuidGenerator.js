@@ -9,6 +9,7 @@ export default (store) => (next) => (action) => {
     case ADD_REVIEW :
       action.review.id = uuidv4();
       break;
+    default:
   }
   next(action);
 };

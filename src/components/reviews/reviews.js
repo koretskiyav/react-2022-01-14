@@ -4,6 +4,8 @@ import Review from './review';
 import ReviewForm from './review-form';
 import styles from './reviews.module.css';
 
+import { reviewsForRestaurantSelector } from '../../redux/selectors';
+
 const Reviews = ({ reviews, restaurantId }) => {
   return (
     <div className={styles.reviews}>
@@ -19,4 +21,8 @@ Reviews.propTypes = {
   reviews: PropTypes.array.isRequired,
 };
 
-export default Reviews;
+const mapStateToProps = (state, ownProps) => ({
+  reviews: reviewsForRestaurantSelector(state, ownProps.restaurantId),
+});
+
+export default connect(mapStateToProps)(Reviews);

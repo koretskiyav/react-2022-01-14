@@ -34,10 +34,14 @@ Review.defaultProps = {
   user: 'Anonymous',
 };
 
-const mapStateToProps = (state, props) => ({
-  user: userSelector(state, state.reviews[props.id].userId).name,
-  text: reviewSelector(state, props.id).text,
-  rating: reviewSelector(state, props.id).rating,
-});
+const mapStateToProps = (state, props) => {
+  const review = reviewSelector(state, props.id);
+  const user = userSelector(state, review.userId);
+  return {
+    user: user.name,
+    text: review.text,
+    rating: review.rating
+  }
+};
 
 export default connect(mapStateToProps)(Review);
