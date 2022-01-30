@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import {obsSelector} from "../../redux/selectors";
 
 const Restaurant = ({ restaurant, stateObs }) => {
-  console.log('RESTAURANT')
+
   const { id, name, menu, reviews } = restaurant;
 
   const [activeTab, setActiveTab] = useState('menu');
