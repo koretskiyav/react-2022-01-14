@@ -27,7 +27,6 @@ Tabs.propTypes = {
     }).isRequired
   ).isRequired,
   activeId: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Tabs;
