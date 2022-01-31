@@ -3,6 +3,19 @@ import { createSelector } from 'reselect';
 // const restaurantsSelector = (state) => state.restaurants;
 const productsSelector = (state) => state.products;
 const orderSelector = (state) => state.order;
+const reviewsSelector = (state) => state.reviews;
+const usersSelector = (state) => state.users;
+
+export const reviewsWithUsernamesSelector = createSelector(
+  [reviewsSelector, usersSelector], (reviews, users) => {
+    Object.values(reviews)
+      .forEach(review => {
+        review.user = users[review.userId].name
+        }
+      )
+    return reviews
+  }
+)
 
 export const orderProductsSelector = createSelector(
   [productsSelector, orderSelector],
