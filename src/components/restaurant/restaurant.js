@@ -6,13 +6,17 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 
-const Restaurant = ({ restaurant }) => {
+const Restaurant = ({ restaurant, ratings }) => {
   const { id, name, menu, reviews } = restaurant;
 
   const [activeTab, setActiveTab] = useState('menu');
 
   const averageRating = useMemo(() => {
-    const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
+    const total = reviews
+      .map((reviewId) => {
+        return reviewId;
+      })
+      .reduce((acc, reviewId) => acc + ratings[reviewId].rating, 0);
     return Math.round(total / reviews.length);
   }, [reviews]);
 
@@ -28,7 +32,9 @@ const Restaurant = ({ restaurant }) => {
       </Banner>
       <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
       {activeTab === 'menu' && <Menu menu={menu} key={id} />}
-      {activeTab === 'reviews' && <Reviews reviews={reviews} />}
+      {activeTab === 'reviews' && (
+        <Reviews restaurantId={id} reviews={reviews} />
+      )}
     </div>
   );
 };

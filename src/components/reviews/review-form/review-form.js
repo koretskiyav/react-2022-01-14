@@ -5,10 +5,11 @@ import Rate from '../../rate';
 import Button from '../../button';
 
 import styles from './review-form.module.css';
+import { ONSUBMIT } from '../../../redux/constants';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 3 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ restaurantId, onSubmit }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
@@ -51,6 +52,9 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
+export default connect(null, (dispatch, props) => ({
+  //onSubmit: (values) => dispatch(ONSUBMIT(props.restaurantId, values)),
+  onSubmit: (values) =>
+    dispatch({ type: ONSUBMIT, restaurantId: props.restaurantId, values }),
+  // не получается использовать константу ONSUMBIT
 }))(ReviewForm);
