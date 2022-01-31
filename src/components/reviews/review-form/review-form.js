@@ -5,6 +5,7 @@ import Rate from '../../rate';
 import Button from '../../button';
 
 import styles from './review-form.module.css';
+import { addReview, addUser, decrement } from '../../../redux/actions';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 3 };
 
@@ -51,6 +52,17 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
+export default connect(null, (dispatch) => ({
+  onSubmit: (values) => {
+    const user = { id: null, name: values.name };
+    dispatch(addUser(user));
+    const review = {
+      id: null,
+      userId: user.id,
+      text: values.text,
+      rating: values.rating,
+    };
+    dispatch(addReview(review));
+    // в нормализованные review попадает, а в текущий список review оно не добавилось
+  },
 }))(ReviewForm);
