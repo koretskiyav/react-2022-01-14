@@ -32,7 +32,9 @@ const Restaurant = ({ restaurant, ratings }) => {
       </Banner>
       <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
       {activeTab === 'menu' && <Menu menu={menu} key={id} />}
-      {activeTab === 'reviews' && <Reviews reviews={reviews} />}
+      {activeTab === 'reviews' && (
+        <Reviews restaurantId={id} reviews={reviews} />
+      )}
     </div>
   );
 };
