@@ -26,6 +26,12 @@
   background-color: var(--yellow-light);
 }
 
+.button[disabled] {
+  border-color: var(--grey) !important;
+  background-color: var(--grey) !important;
+  cursor: not-allowed;
+}
+
 .button + button {
   margin-left: 1px;
 }
