@@ -10,7 +10,7 @@ const Review = ({ review, user }) => (
     <div className={styles.content}>
       <div>
         <h4 className={styles.name} data-id="review-user">
-          {user.name}
+          {user}
         </h4>
         <p className={styles.comment} data-id="review-text">
           {review.text}
@@ -36,8 +36,8 @@ Review.defaultProps = {
 };
 
 const mapStateToProps = (state, props) => ({
-  user: usersSelector(state)[reviewsSelector(state)[props.id].userId],
-  review: reviewsSelector[props.id],
+  user: usersSelector(state)[reviewsSelector(state)[props.id].userId].name,
+  review: reviewsSelector(state)[props.id],
 });
 
 export default connect(mapStateToProps)(Review);

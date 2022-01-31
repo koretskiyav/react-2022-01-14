@@ -5,10 +5,11 @@ import Rate from '../../rate';
 import Button from '../../button';
 
 import styles from './review-form.module.css';
+import { onSubmitReview } from '../../../redux/actions';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 3 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ onSubmit, restaurantId }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
@@ -51,6 +52,10 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
-}))(ReviewForm);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onSubmit: (values) => {
+    return dispatch(onSubmitReview(values, ownProps.restaurantId))
+  }
+});
+
+export default connect(null, mapDispatchToProps)(ReviewForm);
