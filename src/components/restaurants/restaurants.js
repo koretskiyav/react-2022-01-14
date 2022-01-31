@@ -3,19 +3,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
+import { restaurants as oldRestaurants } from '../../fixtures';
 
 function Restaurants({ restaurants }) {
-  const [activeId, setActiveId] = useState(restaurants[0].id);
+  const [activeId, setActiveId] = useState(oldRestaurants[0].id);
 
   const tabs = useMemo(
-    () => restaurants.map(({ id, name }) => ({ id, label: name })),
-    [restaurants]
+    () => oldRestaurants.map(({ id, name }) => ({ id, label: name })),
+    [oldRestaurants]
   );
 
-  const activeRestaurant = useMemo(
-    () => restaurants.find((restaurant) => restaurant.id === activeId),
-    [activeId, restaurants]
-  );
+  const activeRestaurant = restaurants[activeId];
 
   return (
     <div>
