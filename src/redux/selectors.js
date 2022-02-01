@@ -6,6 +6,9 @@ const orderSelector = (state) => state.order;
 const reviewsSelector = (state) => state.reviews;
 const usersSelector = (state) => state.users;
 
+export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
+export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
+
 export const restaurantsListSelector = createSelector(
   restaurantsSelector,
   Object.values

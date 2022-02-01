@@ -4,28 +4,29 @@ import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
 import Loader from '../loader';
-import { restaurantsListSelector } from '../../redux/selectors';
+import {
+  restaurantsListSelector,
+  restaurantsLoadedSelector,
+  restaurantsLoadingSelector,
+} from '../../redux/selectors';
 import { loadRestaurants } from '../../redux/actions';
 
-function Restaurants({ restaurants, loadRestaurants }) {
-  const [activeId, setActiveId] = useState(restaurants[0]?.id);
+function Restaurants({ restaurants, loading, loaded, loadRestaurants }) {
+  const [_activeId, setActiveId] = useState(restaurants[0]?.id);
 
   useEffect(() => {
-    loadRestaurants();
-  }, []); // eslint-disable-line
-
-  useEffect(() => {
-    if (restaurants.length > 0 && !activeId) {
-      setActiveId(restaurants[0]?.id);
-    }
-  }, [restaurants]); // eslint-disable-line
+    if (!loading && !loaded) loadRestaurants();
+  }, [loading, loaded, loadRestaurants]);
 
   const tabs = useMemo(
     () => restaurants.map(({ id, name }) => ({ id, label: name })),
     [restaurants]
   );
 
-  if (!activeId) return <Loader />;
+  if (loading) return <Loader />;
+  if (!loaded) return 'No data :(';
+
+  const activeId = _activeId || restaurants[0]?.id;
 
   return (
     <div>
@@ -46,6 +47,8 @@ Restaurants.propTypes = {
 
 const mapStateToProps = (state) => ({
   restaurants: restaurantsListSelector(state),
+  loading: restaurantsLoadingSelector(state),
+  loaded: restaurantsLoadedSelector(state),
 });
 
 const mapDispatchToProps = {
