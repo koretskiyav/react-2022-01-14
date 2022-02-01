@@ -4,6 +4,10 @@ import {
   REMOVE,
   ADD_REVIEW,
   LOAD_RESTAURANTS,
+  REQUEST,
+  SUCCESS,
+  FAILURE,
+  LOAD_REVIEWS,
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -21,3 +25,16 @@ export const loadRestaurants = () => ({
   type: LOAD_RESTAURANTS,
   CallAPI: '/api/restaurants',
 });
+
+export const loadReviews = (restId) => async (dispatch) => {
+  dispatch({ type: LOAD_REVIEWS + REQUEST, restId });
+
+  try {
+    const data = await fetch(`/api/reviews?id=${restId}`).then((res) =>
+      res.json()
+    );
+    dispatch({ type: LOAD_REVIEWS + SUCCESS, restId, data });
+  } catch (error) {
+    dispatch({ type: LOAD_REVIEWS + FAILURE, restId, error });
+  }
+};
