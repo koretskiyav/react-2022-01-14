@@ -29,8 +29,13 @@ export const averageRatingSelector = createSelector(
   [reviewsSelector, restaurantsSelector, (state, activeId) => activeId],
   (reviews, restaurants, activeId) => {
     const reviewIds = restaurants[activeId].reviews;
-    const restaurantReviews = Object.values(reviews).filter(review => reviewIds.includes(review.id));
-    const total = restaurantReviews.reduce((acc, { rating }) => acc + rating, 0);
+    const restaurantReviews = Object.values(reviews).filter((review) =>
+      reviewIds.includes(review.id)
+    );
+    const total = restaurantReviews.reduce(
+      (acc, { rating }) => acc + rating,
+      0
+    );
     const length = restaurantReviews.length;
     return Math.round(total / length);
   }
@@ -75,12 +80,18 @@ export const reviewsForRestaurantSelector = createSelector(
   [reviewsSelector, restaurantsSelector, (state, restaurantId) => restaurantId],
   (reviews, restaurants, restaurantId) => {
     const restaurant = restaurants[restaurantId];
-    return Object.keys(reviews).filter((key) => restaurant.reviews.includes(key));
+    return Object.keys(reviews).filter((key) =>
+      restaurant.reviews.includes(key)
+    );
   }
 );
 
 export const menuForRestaurantSelector = createSelector(
-  [productsSelector, restaurantsSelector, (state, restaurantId) => restaurantId],
+  [
+    productsSelector,
+    restaurantsSelector,
+    (state, restaurantId) => restaurantId,
+  ],
   (products, restaurants, restaurantId) => {
     const restaurant = restaurants[restaurantId];
     return Object.keys(products).filter((key) => restaurant.menu.includes(key));
