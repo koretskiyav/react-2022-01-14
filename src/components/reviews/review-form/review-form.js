@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { reviewAdd } from '../../../redux/actions';
 
 import useForm from '../../../hooks/use-form';
 import Rate from '../../rate';
@@ -51,6 +52,12 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
-}))(ReviewForm);
+const mapDispatchToProps = (dispatch, props) => ({
+  onSubmit: (values) =>
+    dispatch(reviewAdd({ ...values, restaurantId: props.restaurantId })),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps // TODO
+)(ReviewForm);
