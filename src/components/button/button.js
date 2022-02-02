@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import styles from './button.module.css';
 
@@ -12,8 +13,12 @@ const icons = {
 
 const Button = ({ icon, ...props }) => {
   const Icon = icons[icon];
+  const classes = cn([
+    styles.button,
+    props.type === 'small' && styles.buttonSmall,
+  ]);
   return (
-    <button className={styles.button} {...props}>
+    <button className={classes} {...props}>
       {Icon && <Icon />}
     </button>
   );

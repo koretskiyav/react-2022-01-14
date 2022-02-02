@@ -20,7 +20,9 @@ function Restaurants({ restaurants }) {
   return (
     <div>
       <Tabs tabs={tabs} onChange={setActiveId} activeId={activeId} />
-      <Restaurant restaurant={activeRestaurant} />
+      <div className="container">
+        <Restaurant restaurant={activeRestaurant} />
+      </div>
     </div>
   );
 }

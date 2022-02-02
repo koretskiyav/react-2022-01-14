@@ -1,0 +1,51 @@
+.basket {
+  padding: 1rem;
+  background-color: var(--orange-light);
+}
+
+.basket__heading {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.basket__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.basket__item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.basket__title,
+.basket__counter,
+.basket__price {
+  flex: 1 1 auto;
+}
+
+.basket__title {
+  width: 50%;
+}
+
+.basket__price {
+  text-align: right;
+}
+
+.basket__counter {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.basket__total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--grey-dark);
+  padding-top: 1rem;
+}
