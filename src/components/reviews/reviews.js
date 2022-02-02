@@ -5,7 +5,7 @@ import Review from './review';
 import ReviewForm from './review-form';
 import styles from './reviews.module.css';
 
-import { loadReviews } from '../../redux/actions';
+import { loadReviews, loadUsers } from '../../redux/actions';
 
 const Reviews = ({ reviews, restId, loadReviews }) => {
   useEffect(() => {
