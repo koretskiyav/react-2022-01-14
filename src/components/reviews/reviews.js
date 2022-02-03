@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Review from './review';
@@ -21,15 +21,21 @@ const Reviews = ({ id, reviews, loading, loaded, loadReviews, loadUsers }) => {
     }
   }, [id, loading, loaded, reviews, loadReviews, loadUsers]);
 
+  const reviewsElements = useMemo(
+    () =>
+      reviews.map((review) => (
+        <Review restId={id} key={review.id} id={review.id} />
+      )),
+    [reviews, id]
+  );
+
   if (loading) return <Loader />;
   if (!loaded) return 'No data :(';
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((review) => (
-        <Review restId={id} key={review.id} id={review.id} />
-      ))}
-      <ReviewForm restId={id} />
+      {reviewsElements}
+      <ReviewForm id={id} />
     </div>
   );
 };

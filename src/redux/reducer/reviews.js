@@ -10,6 +10,7 @@ import { arrToMap } from '../utils';
 
 export default produce((draft = {}, action) => {
   const { type, review, reviewId, userId, id, data, error } = action;
+
   switch (type) {
     case LOAD_REVIEWS + REQUEST:
       draft[id] = {

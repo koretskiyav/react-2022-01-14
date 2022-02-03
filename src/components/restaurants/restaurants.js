@@ -6,7 +6,7 @@ import Tabs from '../tabs';
 import Loader from '../loader';
 import {
   restaurantsListSelector,
-  restaurantsLoadedSelector,
+  restaurantsLoadedSelector,  
   restaurantsLoadingSelector,
 } from '../../redux/selectors';
 import { loadRestaurants } from '../../redux/actions';
