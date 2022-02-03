@@ -32,6 +32,20 @@ export const orderProductsSelector = createSelector(
       }))
 );
 
+export const loadedProductsSelector = createSelector(
+  productsSelector,
+  restaurantSelector,
+  (products, restaurant) => restaurant.menu.filter((id) => id in products)
+  // (products, restaurant) => {
+  //   const { menu } = restaurant;
+  //   const menuProducts = menu.map((id) => products[id]);
+  //   const foundProducts = menuProducts.filter(
+  //     (product) => product !== undefined
+  //   );
+  //   return foundProducts;
+  // }
+);
+
 export const totalSelector = createSelector(
   [orderProductsSelector],
   (orderProducts) =>
