@@ -6,11 +6,14 @@ import styles from './product.module.css';
 import Button from '../button';
 import { decrement, increment } from '../../redux/actions';
 import { amountSelector, productSelector } from '../../redux/selectors';
+import Loader from '../loader';
 
 function Product({ product, amount, decrement, increment, fetchData }) {
   useEffect(() => {
     fetchData?.(product.id);
   }, []); // eslint-disable-line
+
+  if (!product) return <Loader />; // чтобы убрать ошибку
 
   return (
     <div className={styles.product} data-id="product">
