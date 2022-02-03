@@ -1,42 +1,60 @@
-import { Component } from 'react';
+import { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Product from '../product';
 import Basket from '../basket';
+import Loader from '../loader';
 
 import styles from './menu.module.css';
 
-class Menu extends Component {
-  static propTypes = {
-    menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  };
+import {
+  productsForRestaurantSelector,
+  productsForRestaurantLoadedSelector,
+  productsForRestaurantLoadingSelector,
+} from '../../redux/selectors';
+import { loadProducts } from '../../redux/actions';
 
-  state = { error: null };
-
-  componentDidCatch(error) {
-    this.setState({ error });
-  }
-
-  render() {
-    const { menu } = this.props;
-
-    if (this.state.error) {
-      return <p>Меню этого ресторана сейчас недоступно :(</p>;
+function Menu({ id, products, loading, loaded, loadProducts }) {
+  useEffect(() => {
+    if (products.length === 0 && !loading && !loaded) {
+      loadProducts(id);
     }
+  }, [id, loading, loaded, loadProducts, products]);
 
-    return (
-      <div className={styles.menu}>
-        <div>
-          {menu.map((id) => (
-            <Product key={id} id={id} />
-          ))}
-        </div>
-        <div>
-          <Basket />
-        </div>
+  const menu = useMemo(
+    () =>
+      products.map((product) => (
+        <Product restId={id} key={product.id} id={product.id} />
+      )),
+    [products, id]
+  );
+
+  if (loading) return <Loader />;
+  if (!loaded) return 'No data :(';
+
+  return (
+    <div className={styles.menu}>
+      <div>{menu}</div>
+      <div>
+        <Basket id={id} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Menu;
+Menu.propTypes = {
+  menu: PropTypes.array,
+};
+
+const mapStateToProps = (state, props) => ({
+  products: productsForRestaurantSelector(state, props),
+  loading: productsForRestaurantLoadingSelector(state, props),
+  loaded: productsForRestaurantLoadedSelector(state, props),
+});
+
+const mapDispatchToProps = {
+  loadProducts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

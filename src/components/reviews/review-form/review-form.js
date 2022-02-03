@@ -59,7 +59,7 @@ ReviewForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  onSubmit: (review) => dispatch(addReview(review, props.restId)),
+  onSubmit: (review) => dispatch(addReview(review, props)),
 });
 
 export default connect(null, mapDispatchToProps)(ReviewForm);

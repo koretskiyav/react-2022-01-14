@@ -12,7 +12,7 @@ import {
 } from '../../redux/selectors';
 
 const Restaurant = ({ restaurant, averageRating }) => {
-  const { id, name, menu, reviews } = restaurant;
+  const { id, name } = restaurant;
 
   const [activeTab, setActiveTab] = useState('menu');
 
@@ -27,8 +27,8 @@ const Restaurant = ({ restaurant, averageRating }) => {
         <Rate value={averageRating} />
       </Banner>
       <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
-      {activeTab === 'menu' && <Menu menu={menu} key={id} />}
-      {activeTab === 'reviews' && <Reviews reviews={reviews} restId={id} />}
+      {activeTab === 'menu' && <Menu id={id} key={id} />}
+      {activeTab === 'reviews' && <Reviews id={id} />}
     </div>
   );
 };

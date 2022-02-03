@@ -1,34 +1,59 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Review from './review';
 import ReviewForm from './review-form';
+import Loader from '../loader';
 import styles from './reviews.module.css';
 
-import { loadReviews } from '../../redux/actions';
+import {
+  reviewsForRestaurantSelector,
+  reviewsForRestaurantLoadedSelector,
+  reviewsForRestaurantLoadingSelector,
+} from '../../redux/selectors';
+import { loadReviews, loadUsers } from '../../redux/actions';
 
-const Reviews = ({ reviews, restId, loadReviews }) => {
+const Reviews = ({ id, reviews, loading, loaded, loadReviews, loadUsers }) => {
   useEffect(() => {
-    loadReviews(restId);
-  }, [restId, loadReviews]);
+    if (reviews.length === 0 && !loading && !loaded) {
+      loadUsers();
+      loadReviews(id);
+    }
+  }, [id, loading, loaded, reviews, loadReviews, loadUsers]);
+
+  const reviewsElements = useMemo(
+    () =>
+      reviews.map((review) => (
+        <Review restId={id} key={review.id} id={review.id} />
+      )),
+    [reviews, id]
+  );
+
+  if (loading) return <Loader />;
+  if (!loaded) return 'No data :(';
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
-      ))}
-      <ReviewForm restId={restId} />
+      {reviewsElements}
+      <ReviewForm id={id} />
     </div>
   );
 };
 
 Reviews.propTypes = {
   restId: PropTypes.string,
-  reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  reviews: PropTypes.array,
 };
+
+const mapStateToProps = (state, props) => ({
+  reviews: reviewsForRestaurantSelector(state, props),
+  loading: reviewsForRestaurantLoadingSelector(state, props),
+  loaded: reviewsForRestaurantLoadedSelector(state, props),
+});
 
 const mapDispatchToProps = {
   loadReviews,
+  loadUsers,
 };
 
-export default connect(null, mapDispatchToProps)(Reviews);
+export default connect(mapStateToProps, mapDispatchToProps)(Reviews);

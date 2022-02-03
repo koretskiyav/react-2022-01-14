@@ -6,7 +6,7 @@ import styles from './review.module.css';
 
 import { reviewWitUserSelector } from '../../../redux/selectors';
 
-const Review = ({ user, text, rating }) => (
+const Review = ({ restId, user, text, rating }) => (
   <div className={styles.review} data-id="review">
     <div className={styles.content}>
       <div>

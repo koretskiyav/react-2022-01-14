@@ -42,10 +42,10 @@ function Basket({ title = 'Basket', total, orderProducts }) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
-    total: totalSelector(state),
-    orderProducts: orderProductsSelector(state),
+    total: totalSelector(state, props),
+    orderProducts: orderProductsSelector(state, props),
   };
 };
 

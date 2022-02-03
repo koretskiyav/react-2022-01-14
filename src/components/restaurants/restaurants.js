@@ -6,7 +6,7 @@ import Tabs from '../tabs';
 import Loader from '../loader';
 import {
   restaurantsListSelector,
-  restaurantsLoadedSelector,
+  restaurantsLoadedSelector,  
   restaurantsLoadingSelector,
 } from '../../redux/selectors';
 import { loadRestaurants } from '../../redux/actions';
@@ -31,7 +31,7 @@ function Restaurants({ restaurants, loading, loaded, loadRestaurants }) {
   return (
     <div>
       <Tabs tabs={tabs} onChange={setActiveId} activeId={activeId} />
-      <Restaurant id={activeId} />
+      <Restaurant key={activeId} id={activeId} />
     </div>
   );
 }

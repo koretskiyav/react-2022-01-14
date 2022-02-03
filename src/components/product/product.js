@@ -7,7 +7,7 @@ import Button from '../button';
 import { decrement, increment } from '../../redux/actions';
 import { amountSelector, productSelector } from '../../redux/selectors';
 
-function Product({ product, amount, decrement, increment, fetchData }) {
+function Product({ restId, product, amount, decrement, increment, fetchData }) {
   useEffect(() => {
     fetchData?.(product.id);
   }, []); // eslint-disable-line
