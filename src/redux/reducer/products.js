@@ -6,17 +6,15 @@ export default (state = {}, action) => {
 
   switch (type) {
     case LOAD_PRODUCTS + REQUEST:
-      return state[id]
-        ? state
-        : {
-            ...state,
-            [id]: {
-              entities: {},
-              loading: true,
-              loaded: false,
-              error: null,
-            },
-          };
+      return {
+        ...state,
+        [id]: {
+          entities: {},
+          loading: true,
+          loaded: false,
+          error: null,
+        },
+      };
     case LOAD_PRODUCTS + SUCCESS:
       return {
         ...state,

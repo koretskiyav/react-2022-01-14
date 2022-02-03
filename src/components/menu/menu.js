@@ -37,14 +37,14 @@ function Menu({ id, products, loading, loaded, loadProducts }) {
     <div className={styles.menu}>
       <div>{menu}</div>
       <div>
-        <Basket />
+        <Basket id={id} />
       </div>
     </div>
   );
 }
 
 Menu.propTypes = {
-  menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  menu: PropTypes.array,
 };
 
 const mapStateToProps = (state, props) => ({

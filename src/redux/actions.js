@@ -34,16 +34,14 @@ export const loadProducts = (id) => ({
   CallAPI: `/api/products?id=${id}`,
 });
 
-export const loadReviews = (restId) => async (dispatch) => {
-  dispatch({ type: LOAD_REVIEWS + REQUEST, restId });
+export const loadReviews = (id) => async (dispatch) => {
+  dispatch({ type: LOAD_REVIEWS + REQUEST, id });
 
   try {
-    const data = await fetch(`/api/reviews?id=${restId}`).then((res) =>
-      res.json()
-    );
-    dispatch({ type: LOAD_REVIEWS + SUCCESS, restId, data });
+    const data = await fetch(`/api/reviews?id=${id}`).then((res) => res.json());
+    dispatch({ type: LOAD_REVIEWS + SUCCESS, id, data });
   } catch (error) {
-    dispatch({ type: LOAD_REVIEWS + FAILURE, restId, error });
+    dispatch({ type: LOAD_REVIEWS + FAILURE, id, error });
   }
 };
 
