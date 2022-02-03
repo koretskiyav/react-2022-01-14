@@ -8,9 +8,9 @@ import { decrement, increment } from '../../redux/actions';
 import { amountSelector, productSelector } from '../../redux/selectors';
 
 function Product({ product, amount, decrement, increment, fetchData }) {
-  useEffect(() => {
-    fetchData?.(product.id);
-  }, []); // eslint-disable-line
+  // useEffect(() => {
+  //   fetchData?.(product.id);
+  // }, []); // eslint-disable-line
 
   return (
     <div className={styles.product} data-id="product">

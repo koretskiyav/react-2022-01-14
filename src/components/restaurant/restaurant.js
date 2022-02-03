@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '../menu';
@@ -7,7 +7,7 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 import {
-  averageRatingSelector,
+  //averageRatingSelector,
   restaurantSelector,
 } from '../../redux/selectors';
 
@@ -24,10 +24,10 @@ const Restaurant = ({ restaurant, averageRating }) => {
   return (
     <div>
       <Banner heading={name}>
-        <Rate value={averageRating} />
+        <Rate value={0} />
       </Banner>
       <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
-      {activeTab === 'menu' && <Menu menu={menu} key={id} />}
+      {activeTab === 'menu' && <Menu menu={menu} key={id} restId={id} />}
       {activeTab === 'reviews' && <Reviews reviews={reviews} restId={id} />}
     </div>
   );
@@ -45,7 +45,7 @@ Restaurant.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   restaurant: restaurantSelector(state, props),
-  averageRating: averageRatingSelector(state, props),
+  //averageRating: averageRatingSelector(state, props),
 });
 
 export default connect(mapStateToProps)(Restaurant);
