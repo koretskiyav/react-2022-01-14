@@ -1,11 +1,12 @@
 import produce from 'immer';
 import {
   ADD_REVIEW,
-  FAILURE,
+  SET_ACTIVE_RESTAURANT,
   LOAD_RESTAURANTS,
   REQUEST,
   SUCCESS,
-} from '../constants';
+  FAILURE,
+} from '../index';
 import { arrToMap } from '../utils';
 
 const initialState = {
@@ -15,7 +16,7 @@ const initialState = {
   error: null,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action, ...rest) => {
   const { type, restId, reviewId, data, error } = action;
 
   switch (type) {
@@ -23,14 +24,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        loaded: false,
         error: null,
       };
     case LOAD_RESTAURANTS + SUCCESS:
+      const activeId = data[0].id;
+      const entities = arrToMap(data);
       return {
         ...state,
-        entities: arrToMap(data),
+        entities: entities,
         loading: false,
         loaded: true,
+        activeId: activeId,
       };
     case LOAD_RESTAURANTS + FAILURE:
       return {
@@ -38,6 +43,11 @@ export default (state = initialState, action) => {
         loading: false,
         loaded: false,
         error,
+      };
+    case SET_ACTIVE_RESTAURANT:
+      return {
+        ...state,
+        activeId: action.activeId,
       };
     case ADD_REVIEW:
       return produce(state, (draft) => {
