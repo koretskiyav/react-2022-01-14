@@ -4,11 +4,20 @@ import {
   REMOVE,
   ADD_REVIEW,
   LOAD_RESTAURANTS,
+  LOAD_PRODUCTS,
+  LOAD_REVIEWS,
+  LOAD_USERS,
   REQUEST,
   SUCCESS,
   FAILURE,
-  LOAD_REVIEWS,
 } from './constants';
+
+import {
+  usersLoadingSelector,
+  usersLoadedSelector,
+  reviewsLoadingSelector,
+  reviewsLoadedSelector,
+} from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, id });
 export const decrement = (id) => ({ type: DECREMENT, id });
@@ -26,7 +35,12 @@ export const loadRestaurants = () => ({
   CallAPI: '/api/restaurants',
 });
 
-export const loadReviews = (restId) => async (dispatch) => {
+export const loadReviews = (restId) => async (dispatch, getState) => {
+  const state = getState();
+  const loading = reviewsLoadingSelector(state, { restId });
+  const loaded = reviewsLoadedSelector(state, { restId });
+
+  if (loading || loaded) return;
   dispatch({ type: LOAD_REVIEWS + REQUEST, restId });
 
   try {
@@ -37,4 +51,22 @@ export const loadReviews = (restId) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: LOAD_REVIEWS + FAILURE, restId, error });
   }
+};
+
+export const loadProducts = (restId) => ({
+  type: LOAD_PRODUCTS,
+  CallAPI: `/api/products?id=${restId}`,
+  restId,
+});
+
+const _loadUsers = () => ({ type: LOAD_USERS, CallAPI: '/api/users' });
+
+export const loadUsers = () => async (dispatch, getState) => {
+  const state = getState();
+  const loading = usersLoadingSelector(state);
+  const loaded = usersLoadedSelector(state);
+
+  if (loading || loaded) return;
+
+  dispatch(_loadUsers());
 };
