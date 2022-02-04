@@ -10,6 +10,8 @@ import { loadReviews, loadUsers } from '../../redux/actions';
 import {
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  usersLoadingSelector,
+  usersLoadedSelector,
  } from '../../redux/selectors';
 
 const Reviews = ({
@@ -17,22 +19,21 @@ const Reviews = ({
   restId,
   loadReviews,
   loadUsers,
-  loading,
-  loaded,
+  loadingReviews,
+  loadedReviews,
+  loadingUsers,
+  loadedUsers,
 }) => {
   useEffect(() => {
-    if (!loading && !loaded[restId]) {
-      loadUsers();
-      loadReviews(restId);
-    }
-  }, [restId, loadReviews, loading, loaded, loadUsers]);
+    if (!loadingReviews && !loadedReviews[restId]) loadReviews(restId);
+  },[restId, loadReviews, loadingReviews, loadedReviews]);
 
-  // useEffect(() => {
-  //   if (!loading && !loaded) loadUsers();
-  // },[loadUsers, loading, loaded]);
+  useEffect(() => {
+    if (!loadingUsers && !loadedUsers) loadUsers();
+  },[loadUsers, loadingUsers, loadedUsers]);
 
-  if (loading) return <Loader />;
-  if (!loaded) return 'No data :(';
+  if (loadingReviews && loadingUsers) return <Loader />;
+  if (!loadedReviews || !loadedUsers) return 'No data :(';
 
   return (
     <div className={styles.reviews}>
@@ -50,8 +51,10 @@ Reviews.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  loading: reviewsLoadingSelector(state),
-  loaded: reviewsLoadedSelector(state),
+  loadingReviews: reviewsLoadingSelector(state),
+  loadedReviews: reviewsLoadedSelector(state),
+  loadingUsers: usersLoadingSelector(state),
+  loadedUsers: usersLoadedSelector(state),
 });
 
 const mapDispatchToProps = {
