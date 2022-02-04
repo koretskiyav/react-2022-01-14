@@ -13,7 +13,7 @@ import {
 
 const Restaurant = ({ restaurant, averageRating }) => {
   const { id, name, menu, reviews } = restaurant;
-
+  console.log(restaurant);
   const [activeTab, setActiveTab] = useState('menu');
 
   const tabs = [
@@ -27,7 +27,7 @@ const Restaurant = ({ restaurant, averageRating }) => {
         <Rate value={averageRating} />
       </Banner>
       <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
-      {activeTab === 'menu' && <Menu menu={menu} key={id} />}
+      {activeTab === 'menu' && <Menu restId={id} menu={menu} key={id} />}
       {activeTab === 'reviews' && <Reviews reviews={reviews} restId={id} />}
     </div>
   );
@@ -43,9 +43,13 @@ Restaurant.propTypes = {
   averageRating: PropTypes.number,
 };
 
-const mapStateToProps = (state, props) => ({
-  restaurant: restaurantSelector(state, props),
-  averageRating: averageRatingSelector(state, props),
-});
+const mapStateToProps = (state, props) => {
+  console.log(state);
+  console.log(props);
+  return {
+    restaurant: restaurantSelector(state, props),
+    averageRating: averageRatingSelector(state, props),
+  };
+};
 
 export default connect(mapStateToProps)(Restaurant);

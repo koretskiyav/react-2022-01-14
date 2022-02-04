@@ -8,6 +8,7 @@ import {
   SUCCESS,
   FAILURE,
   LOAD_REVIEWS,
+  LOAD_PRODUCTS,
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -36,5 +37,18 @@ export const loadReviews = (restId) => async (dispatch) => {
     dispatch({ type: LOAD_REVIEWS + SUCCESS, restId, data });
   } catch (error) {
     dispatch({ type: LOAD_REVIEWS + FAILURE, restId, error });
+  }
+};
+
+export const loadProducts = (restId) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCTS + REQUEST, restId });
+
+  try {
+    const data = await fetch(`/api/products?id=${restId}`).then((res) =>
+      res.json()
+    );
+    dispatch({ type: LOAD_PRODUCTS + SUCCESS, restId, data });
+  } catch (error) {
+    dispatch({ type: LOAD_PRODUCTS + FAILURE, restId, error });
   }
 };

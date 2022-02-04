@@ -1,10 +1,12 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Product from '../product';
 import Basket from '../basket';
 
 import styles from './menu.module.css';
+import { connect } from 'react-redux';
+import { loadProducts } from '../../redux/actions';
+import Products from '../product/products';
 
 class Menu extends Component {
   static propTypes = {
@@ -18,7 +20,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { menu } = this.props;
+    const { restId } = this.props;
 
     if (this.state.error) {
       return <p>Меню этого ресторана сейчас недоступно :(</p>;
@@ -27,9 +29,7 @@ class Menu extends Component {
     return (
       <div className={styles.menu}>
         <div>
-          {menu.map((id) => (
-            <Product key={id} id={id} />
-          ))}
+          <Products restId={restId} />
         </div>
         <div>
           <Basket />

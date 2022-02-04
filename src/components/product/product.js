@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -6,8 +5,10 @@ import styles from './product.module.css';
 import Button from '../button';
 import { decrement, increment } from '../../redux/actions';
 import { amountSelector, productSelector } from '../../redux/selectors';
+import { useEffect } from 'react';
 
 function Product({ product, amount, decrement, increment, fetchData }) {
+  console.log(product);
   useEffect(() => {
     fetchData?.(product.id);
   }, []); // eslint-disable-line

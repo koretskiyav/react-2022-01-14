@@ -7,9 +7,9 @@ import styles from './reviews.module.css';
 
 import { loadReviews } from '../../redux/actions';
 
-const Reviews = ({ reviews, restId, loadReviews }) => {
+const Reviews = ({ reviews, restId, loadReviews, loading, loaded }) => {
   useEffect(() => {
-    loadReviews(restId);
+    if (!loading && !loaded) loadReviews(restId);
   }, [restId, loadReviews]);
 
   return (
