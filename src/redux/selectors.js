@@ -27,11 +27,17 @@ export const restaurantsListSelector = createSelector(
   Object.values
 );
 
-export const restaurantSelector = (state, { id }) =>
-  restaurantsSelector(state)[id];
+export const restaurantSelector = (state, { id }) => restaurantsSelector(state)[id];
 export const productSelector = (state, { id }) => productsSelector(state)[id];
 export const reviewSelector = (state, { id }) => reviewsSelector(state)[id];
 export const amountSelector = (state, { id }) => orderSelector(state)[id] || 0;
+export const restaurantByProductSelector = (state, {product,}) => restaurantsListSelector(state)
+    .filter(({menu,}) => menu.includes(product.id))[0];
+// ???
+// export const restaurantIdByProductSelector = createSelector(
+//     restaurantByProductSelector,
+//     restaurant => restaurant?.id || '',
+// );
 export const orderProductsSelector = createSelector(
   [productsSelector, orderSelector],
   (products, order) =>
