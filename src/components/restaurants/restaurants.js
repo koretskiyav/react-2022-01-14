@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
-import Tabs from '../tabs';
 import Loader from '../loader';
 import {
   restaurantsListSelector,
@@ -11,27 +11,33 @@ import {
 } from '../../redux/selectors';
 import { loadRestaurants } from '../../redux/actions';
 
-function Restaurants({ restaurants, loading, loaded, loadRestaurants }) {
-  const [_activeId, setActiveId] = useState(restaurants[0]?.id);
+import styles from './restaurants.module.css';
 
+function Restaurants({ restaurants, loading, loaded, loadRestaurants, match }) {
   useEffect(() => {
     if (!loading && !loaded) loadRestaurants();
   }, [loading, loaded, loadRestaurants]);
 
-  const tabs = useMemo(
-    () => restaurants.map(({ id, name }) => ({ id, label: name })),
-    [restaurants]
-  );
-
   if (loading) return <Loader />;
   if (!loaded) return 'No data :(';
 
-  const activeId = _activeId || restaurants[0]?.id;
+  const { restId } = match.params;
 
   return (
     <div>
-      <Tabs tabs={tabs} onChange={setActiveId} activeId={activeId} />
-      <Restaurant id={activeId} />
+      <div className={styles.tabs}>
+        {restaurants.map(({ id, name }) => (
+          <NavLink
+            key={id}
+            to={`/restaurants/${id}`}
+            className={styles.tab}
+            activeClassName={styles.active}
+          >
+            {name}
+          </NavLink>
+        ))}
+      </div>
+      <Restaurant id={restId} />
     </div>
   );
 }
