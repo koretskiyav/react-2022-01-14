@@ -9,6 +9,7 @@ import {
   FAILURE,
   LOAD_REVIEWS,
   LOAD_PRODUCTS,
+  LOAD_USERS,
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -32,6 +33,22 @@ export const loadProducts = (restId) => ({
   id: restId,
   CallAPI: restId ? `/api/products?id=${restId}` : '/api/products',
 });
+
+export const loadUsers = () => async (dispatch) => {
+  dispatch({ type: LOAD_USERS + REQUEST });
+
+  try {
+    const data = await (await fetch('/api/users')).json();
+    dispatch({
+      type: LOAD_USERS + SUCCESS,
+      data,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOAD_USERS + FAILURE,
+    });
+  }
+};
 
 export const loadReviews = (restId) => async (dispatch) => {
   dispatch({ type: LOAD_REVIEWS + REQUEST, restId });
