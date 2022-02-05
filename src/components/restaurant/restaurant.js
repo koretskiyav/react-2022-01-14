@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '../menu';
@@ -19,8 +18,6 @@ const REVIEWS_LINK = 'reviews';
 
 const Restaurant = ({ restaurant, averageRating }) => {
   const { id, name, menu, reviews } = restaurant;
-
-  const [activeTab, setActiveTab] = useState('menu');
 
   const tabs = [
     { id: MENU_LINK, label: 'Menu' },
