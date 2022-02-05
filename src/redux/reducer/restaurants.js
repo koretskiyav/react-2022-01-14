@@ -10,6 +10,7 @@ import { arrToMap } from '../utils';
 
 const initialState = {
   entities: {},
+  productToRestaurantMap: {},
   loading: false,
   loaded: false,
   error: null,
@@ -31,6 +32,11 @@ export default (state = initialState, action) => {
         entities: arrToMap(data),
         loading: false,
         loaded: true,
+        productToRestaurantMap: Object.fromEntries(
+          data.flatMap(({ menu, id }) =>
+            menu.map((productId) => [productId, id])
+          )
+        ),
       };
     case LOAD_RESTAURANTS + FAILURE:
       return {
