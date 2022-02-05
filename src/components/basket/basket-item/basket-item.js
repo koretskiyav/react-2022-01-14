@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
+import { restIdForProductSelector } from '../../../redux/selectors';
 
 function BasketItem({
+  restId,
   product,
   amount,
   subtotal,
@@ -15,7 +18,13 @@ function BasketItem({
   return (
     <div className={styles.basketItem}>
       <div className={styles.name}>
-        <span>{product.name}</span>
+        <NavLink
+          key={product.id}
+          to={`/restaurants/${restId}/menu`}
+          className={styles.link}
+        >
+          <span>{product.name}</span>
+        </NavLink>
       </div>
       <div className={styles.info}>
         <div className={styles.counter}>
@@ -30,10 +39,14 @@ function BasketItem({
   );
 }
 
+const mapStateToProps = (state, props) => ({
+  restId: restIdForProductSelector(state, props.product),
+});
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   increment: () => dispatch(increment(ownProps.product.id)),
   decrement: () => dispatch(decrement(ownProps.product.id)),
   remove: () => dispatch(remove(ownProps.product.id)),
 });
 
-export default connect(null, mapDispatchToProps)(BasketItem);
+export default connect(mapStateToProps, mapDispatchToProps)(BasketItem);

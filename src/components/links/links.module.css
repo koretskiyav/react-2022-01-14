@@ -1,0 +1,19 @@
+.links {
+  height: auto;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--grey);
+}
+
+.links span {
+  cursor: pointer;
+}
+
+.link {
+  padding: 4px 12px;
+  color: var(--black);
+}
+
+.link.active {
+  border-bottom: 1px solid var(--black);
+}

@@ -72,3 +72,12 @@
 .info p:first-child {
   font-weight: bold;
 }
+
+.link span {
+  cursor: pointer;
+}
+
+.link:hover {
+  border-bottom: 1px solid var(--black);
+  color: var(--black);
+}

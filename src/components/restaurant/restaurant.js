@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
-import Tabs from '../tabs';
+import Links from '../links';
 import {
   averageRatingSelector,
   restaurantSelector,
@@ -14,11 +15,9 @@ import {
 const Restaurant = ({ restaurant, averageRating }) => {
   const { id, name, menu, reviews } = restaurant;
 
-  const [activeTab, setActiveTab] = useState('menu');
-
-  const tabs = [
-    { id: 'menu', label: 'Menu' },
-    { id: 'reviews', label: 'Reviews' },
+  const links = [
+    { linkId: 'menu', label: 'Menu', to: `/restaurants/${id}/menu` },
+    { linkId: 'reviews', label: 'Reviews', to: `/restaurants/${id}/reviews` },
   ];
 
   return (
@@ -26,9 +25,20 @@ const Restaurant = ({ restaurant, averageRating }) => {
       <Banner heading={name}>
         <Rate value={averageRating} />
       </Banner>
-      <Tabs tabs={tabs} activeId={activeTab} onChange={setActiveTab} />
-      {activeTab === 'menu' && <Menu menu={menu} key={id} restId={id} />}
-      {activeTab === 'reviews' && <Reviews reviews={reviews} restId={id} />}
+      <Links links={links}></Links>
+      <Switch>
+        <Route path="/restaurants/:restId/menu">
+          {({ match }) => (
+            <Menu menu={menu} key={id} restId={match.params.restId} />
+          )}
+        </Route>
+        <Route path="/restaurants/:restId/reviews">
+          {({ match }) => (
+            <Reviews reviews={reviews} restId={match.params.restId} />
+          )}
+        </Route>
+        <Redirect to={`/restaurants/:restId/menu`} />
+      </Switch>
     </div>
   );
 };
