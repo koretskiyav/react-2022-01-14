@@ -29,6 +29,7 @@ export const loadRestaurants = () => ({
 
 export const loadProducts = (restId) => ({
   type: LOAD_PRODUCTS,
+  id: restId,
   CallAPI: restId ? `/api/products?id=${restId}` : '/api/products',
 });
 

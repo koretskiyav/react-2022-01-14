@@ -8,6 +8,8 @@ const usersSelector = (state) => state.users;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
+export const menusLoadingSelector = (state) => state.menu.loading;
+export const menusLoadedSelector = (state) => state.menu.loaded;
 
 export const restaurantsListSelector = createSelector(
   restaurantsSelector,
@@ -36,15 +38,12 @@ export const loadedProductsSelector = createSelector(
   productsSelector,
   restaurantSelector,
   (products, restaurant) => restaurant.menu.filter((id) => id in products)
-  // (products, restaurant) => {
-  //   const { menu } = restaurant;
-  //   const menuProducts = menu.map((id) => products[id]);
-  //   const foundProducts = menuProducts.filter(
-  //     (product) => product !== undefined
-  //   );
-  //   return foundProducts;
-  // }
 );
+
+export const isMenuLoadingSelector = (state, { id }) =>
+  menusLoadingSelector(state)[id];
+export const isMenuLoadedSelector = (state, { id }) =>
+  menusLoadedSelector(state)[id];
 
 export const totalSelector = createSelector(
   [orderProductsSelector],

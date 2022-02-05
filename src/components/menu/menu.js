@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 
 import Product from '../product';
 import Basket from '../basket';
+import Loader from '../loader';
 
 import styles from './menu.module.css';
-import { loadedProductsSelector } from '../../redux/selectors';
+import {
+  isMenuLoadedSelector,
+  isMenuLoadingSelector,
+  loadedProductsSelector,
+} from '../../redux/selectors';
 import { loadProducts } from '../../redux/actions';
 
 class Menu extends Component {
@@ -22,12 +27,23 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    const { loadProducts, id } = this.props;
-    loadProducts(id);
+    const { loadProducts, id, loading, loaded } = this.props;
+
+    if (!loading && !loaded) {
+      loadProducts(id);
+    }
   }
 
   render() {
-    const { menu } = this.props;
+    const { menu, loading, loaded } = this.props;
+
+    if (loading) {
+      return <Loader />;
+    }
+
+    if (!loaded) {
+      return 'No products';
+    }
 
     if (this.state.error) {
       return <p>Меню этого ресторана сейчас недоступно :(</p>;
@@ -50,6 +66,8 @@ class Menu extends Component {
 
 const mapStateToProps = (state, props) => ({
   menu: loadedProductsSelector(state, props),
+  loading: isMenuLoadingSelector(state, props),
+  loaded: isMenuLoadedSelector(state, props),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
