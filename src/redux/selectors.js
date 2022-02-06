@@ -70,3 +70,17 @@ export const averageRatingSelector = createSelector(
     );
   }
 );
+
+const productIdInBasketSelector = (state, { product }) => product.id;
+
+export const restIdSelector = createSelector(
+  restaurantsSelector,
+  productIdInBasketSelector,
+  (restaurants, productid) => {
+    return Object.values(restaurants).filter((e) => {
+      if (e.menu.includes(productid)) return e.id;
+    })[0].id;
+  }
+);
+
+// у меня проблемы с перебором =(
