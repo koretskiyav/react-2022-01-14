@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,7 +5,6 @@ import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
-import Tabs from '../tabs';
 import {
   averageRatingSelector,
   restaurantSelector,
@@ -16,8 +14,6 @@ import styles from './restaurant.module.css'
 
 const Restaurant = ({ restaurant, averageRating }) => {
   const { id : restId, name, menu, reviews } = restaurant;
-
-  const [activeTab, setActiveTab] = useState('menu');
 
   const tabs = [
     { id: 'menu', label: 'Menu' },

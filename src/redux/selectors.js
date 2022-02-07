@@ -22,6 +22,8 @@ export const reviewsLoadedSelector = (state, props) =>
 export const usersLoadingSelector = (state) => state.users.loading;
 export const usersLoadedSelector = (state) => state.users.loaded;
 
+export const orderRestIdSelector = (state, id) => state.order[id].restId;
+
 export const restaurantsListSelector = createSelector(
   restaurantsSelector,
   Object.values
@@ -31,17 +33,17 @@ export const restaurantSelector = (state, { id }) =>
   restaurantsSelector(state)[id];
 export const productSelector = (state, { id }) => productsSelector(state)[id];
 export const reviewSelector = (state, { id }) => reviewsSelector(state)[id];
-export const amountSelector = (state, { id }) => orderSelector(state)[id] || 0;
+export const amountSelector = (state, { id }) => orderSelector(state)[id]?.count || 0;
 export const orderProductsSelector = createSelector(
   [productsSelector, orderSelector],
   (products, order) =>
     Object.keys(order)
-      .filter((productId) => order[productId] > 0)
+      .filter((productId) => order[productId].count > 0)
       .map((productId) => products[productId])
       .map((product) => ({
         product,
-        amount: order[product.id],
-        subtotal: order[product.id] * product.price,
+        amount: order[product.id].count,
+        subtotal: order[product.id].count * product.price,
       }))
 );
 
