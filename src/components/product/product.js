@@ -58,8 +58,8 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  decrement: () => dispatch(decrement(props.id)),
-  increment: () => dispatch(increment(props.id)),
+  decrement: () => dispatch(decrement(props.id, props.restId)),
+  increment: () => dispatch(increment(props.id, props.restId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
