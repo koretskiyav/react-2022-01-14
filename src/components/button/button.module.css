@@ -50,9 +50,14 @@
 
 .button.secondary:hover,
 .button.secondary:focus,
-.button.secondary:active {
+.button.secondary:active,
+.button.disabled {
   border-color: var(--grey);
   background-color: var(--grey);
+}
+
+.button.disabled {
+  cursor: wait;
 }
 
 .button.small {

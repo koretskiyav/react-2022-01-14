@@ -1,4 +1,4 @@
-import { replace } from 'connected-react-router';
+import {goBack, push, replace} from 'connected-react-router';
 
 import {
   DECREMENT,
@@ -11,14 +11,14 @@ import {
   LOAD_USERS,
   REQUEST,
   SUCCESS,
-  FAILURE,
+  FAILURE, SEND_CHECKOUT,
 } from './constants';
 
 import {
   usersLoadingSelector,
   usersLoadedSelector,
   reviewsLoadingSelector,
-  reviewsLoadedSelector,
+  reviewsLoadedSelector, checkoutLoadingSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -54,6 +54,34 @@ export const loadReviews = (restId) => async (dispatch, getState) => {
     dispatch({ type: LOAD_REVIEWS + FAILURE, restId, error });
     dispatch(replace('/error'));
   }
+};
+
+export const checkoutOrder = () => async (dispatch, getState) => {
+  const state = getState();
+  const loading = checkoutLoadingSelector(state);
+
+  if (loading) return;
+  dispatch({ type: SEND_CHECKOUT + REQUEST });
+
+  const order = Object.keys(state.order.entities).map((id) => ({id: id, amount: state.order.entities[id]}));
+
+
+  try {
+    const data = await fetch('/api/order',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order)
+        }).then(res => res.json());
+    dispatch({ type: SEND_CHECKOUT + SUCCESS, data });
+  } catch (error) {
+    dispatch({ type: SEND_CHECKOUT + FAILURE, error });
+  }
+  dispatch(push('/message'));
+};
+
+export const backHistory = () => (dispatch) => {
+  dispatch(goBack());
 };
 
 export const loadProducts = (restId) => ({
