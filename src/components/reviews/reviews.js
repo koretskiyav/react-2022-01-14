@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import Review from './review';
 import Loader from '../loader';
 import ReviewForm from './review-form';
 import styles from './reviews.module.css';
+import './reviews.css';
 
 import { loadReviews, loadUsers } from '../../redux/actions';
 import {
@@ -29,9 +31,17 @@ const Reviews = ({
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
-      ))}
+      <TransitionGroup>
+        {reviews.map((id) => (
+            <CSSTransition
+                key={id}
+                timeout={500}
+                classNames="reviews-item"
+            >
+              <Review key={id} id={id} />
+            </CSSTransition>
+        ))}
+      </TransitionGroup>
       <ReviewForm restId={restId} />
     </div>
   );
