@@ -12,6 +12,7 @@ import {checkoutLoadingSelector, orderProductsSelector, totalSelector} from '../
 
 import { UserConsumer } from '../../contexts/user-context';
 import {checkoutOrder} from "../../redux/actions";
+import Currency from "../currency";
 
 function Basket({ title = 'Basket', total, orderProducts, checkoutOrder, loading }) {
   // const { name } = useContext(userContext);
@@ -52,7 +53,7 @@ function Basket({ title = 'Basket', total, orderProducts, checkoutOrder, loading
           <p>Total</p>
         </div>
         <div className={itemStyles.info}>
-          <p>{`${total} $`}</p>
+          <p><Currency value={total}/></p>
         </div>
       </div>
         <Switch>

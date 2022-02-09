@@ -13,3 +13,9 @@
   right: 20px;
   top: 0;
 }
+
+h2.currency {
+  left: 20px;
+  cursor: pointer;
+  right: auto;
+}

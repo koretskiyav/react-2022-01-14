@@ -5,6 +5,7 @@ import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
 import {checkoutLoadingSelector} from "../../../redux/selectors";
+import Currency from "../../currency";
 
 function BasketItem({
   product,
@@ -27,7 +28,7 @@ function BasketItem({
           <span className={styles.count}>{amount}</span>
           <Button onClick={increment} icon="plus" disabled={loading} secondary small />
         </div>
-        <p className={cn(styles.count, styles.price)}>{subtotal} $</p>
+        <p className={cn(styles.count, styles.price)}><Currency value={subtotal}/></p>
         <Button onClick={remove} icon="delete" disabled={loading} secondary small />
       </div>
     </div>
