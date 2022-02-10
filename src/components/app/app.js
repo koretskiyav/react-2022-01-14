@@ -7,10 +7,11 @@ import { UserProvider } from '../../contexts/user-context';
 import { CurrencyProvider } from '../../contexts/currency-context';
 import Message from "../message";
 import useCurrency from "../../hooks/use-currnecy";
+import {DOLLAR} from "../../redux/constants";
 
 const App = () => {
   const [name, setName] = useState('Andrey');
-  const {sign, changeCurrency} = useCurrency('$');
+  const {sign, changeCurrency} = useCurrency(DOLLAR);
 
   return (
     <div>

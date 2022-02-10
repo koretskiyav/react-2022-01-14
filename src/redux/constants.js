@@ -14,3 +14,7 @@ export const SUCCESS = '_SUCCESS';
 export const FAILURE = '_FAILURE';
 
 export const CHECKOUT_SUCCESS = 'Спасибо за заказ!';
+
+export const DOLLAR = '$';
+export const EURO = '€';
+export const YEN = '¥';

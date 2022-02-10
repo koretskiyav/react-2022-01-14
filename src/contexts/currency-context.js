@@ -1,7 +1,8 @@
 import { createContext } from 'react';
+import {DOLLAR} from "../redux/constants";
 
 export const currencyContext = createContext({
-    sign: '$',
+    sign: DOLLAR,
     changeCurrency: () => {}
 });
 
