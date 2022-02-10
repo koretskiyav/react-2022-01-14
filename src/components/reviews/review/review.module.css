@@ -6,6 +6,12 @@
   background-color: var(--white);
   color: var(--black);
   transition: 0.2s all;
+  animation-name: moveInFromLeft;
+  animation-duration: 1s;
+}
+.review:nth-child(2n) {
+  animation-name: moveInFromRigth;
+  animation-duration: 1s;
 }
 
 .content {
@@ -53,5 +59,33 @@
   .comment {
     font-size: 14px;
     line-height: 20px;
+  }
+}
+
+@keyframes moveInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-600px);
+  }
+  70% {
+    opacity: 30%;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInFromRigth {
+  0% {
+    opacity: 0;
+    transform: translateX(600px);
+  }
+  70% {
+    opacity: 30%;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
   }
 }

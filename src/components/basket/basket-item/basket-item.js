@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
+import {checkoutLoadingSelector} from "../../../redux/selectors";
+import Currency from "../../currency";
 
 function BasketItem({
   product,
@@ -13,6 +15,7 @@ function BasketItem({
   increment,
   decrement,
   remove,
+  loading,
 }) {
   return (
     <div className={styles.basketItem}>
@@ -21,16 +24,20 @@ function BasketItem({
       </div>
       <div className={styles.info}>
         <div className={styles.counter}>
-          <Button onClick={decrement} icon="minus" secondary small />
+          <Button onClick={decrement} icon="minus" disabled={loading} secondary small />
           <span className={styles.count}>{amount}</span>
-          <Button onClick={increment} icon="plus" secondary small />
+          <Button onClick={increment} icon="plus" disabled={loading} secondary small />
         </div>
-        <p className={cn(styles.count, styles.price)}>{subtotal} $</p>
-        <Button onClick={remove} icon="delete" secondary small />
+        <p className={cn(styles.count, styles.price)}><Currency value={subtotal}/></p>
+        <Button onClick={remove} icon="delete" disabled={loading} secondary small />
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  loading: checkoutLoadingSelector(state)
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   increment: () => dispatch(increment(ownProps.product.id)),
@@ -38,4 +45,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   remove: () => dispatch(remove(ownProps.product.id)),
 });
 
-export default connect(null, mapDispatchToProps)(BasketItem);
+export default connect(mapStateToProps, mapDispatchToProps)(BasketItem);

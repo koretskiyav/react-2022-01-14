@@ -18,6 +18,7 @@ const Button = ({
   children,
   primary = false,
   secondary = false,
+  disabled = false,
   small = false,
   block = false,
   ...props
@@ -28,6 +29,7 @@ const Button = ({
       className={cn(styles.button, {
         [styles.primary]: primary,
         [styles.secondary]: secondary,
+        [styles.disabled]: disabled,
         [styles.small]: small,
         [styles.block]: block,
       })}
