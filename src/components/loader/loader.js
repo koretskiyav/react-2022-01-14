@@ -1,8 +1,9 @@
+import cn from'classnames';
 import styles from './loader.module.css';
 
-function Loader() {
+function Loader({className}) {
   return (
-    <div className={styles.loader}>
+    <div className={cn(styles.loader, className)}>
       <div className={styles.bounce1} />
       <div className={styles.bounce2} />
     </div>

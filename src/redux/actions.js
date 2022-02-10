@@ -12,6 +12,7 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  CREATE_ORDER,
 } from './constants';
 
 import {
@@ -19,6 +20,8 @@ import {
   usersLoadedSelector,
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  cartSelector,
+  orderProcessingSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -72,4 +75,33 @@ export const loadUsers = () => async (dispatch, getState) => {
   if (loading || loaded) return;
 
   dispatch(_loadUsers());
+};
+
+export const createOrder = () => async (dispatch, getState) => {
+  const state = getState();
+  const cart = cartSelector(state);
+  const processing = orderProcessingSelector(state);
+
+  if (processing) return;
+  dispatch({ type: CREATE_ORDER + REQUEST, cart });
+
+  try {
+    const response = await fetch(`/api/order`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(cart),
+    });
+
+    if (response.ok) {
+      dispatch({ type: CREATE_ORDER + SUCCESS, cart });
+    } else {
+      await response.json().then(error => Promise.reject(new Error(error)));
+    }
+  } catch (error) {
+    dispatch({ type: CREATE_ORDER + FAILURE, cart, error: error.message, });
+  } finally {
+    dispatch(replace('/checkout/status'));
+  }
 };

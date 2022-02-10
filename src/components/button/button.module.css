@@ -41,6 +41,11 @@
   border: 1px solid var(--grey-dark);
 }
 
+.button.transparent {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
 .button.primary:hover,
 .button.primary:focus,
 .button.primary:active {
@@ -53,6 +58,21 @@
 .button.secondary:active {
   border-color: var(--grey);
   background-color: var(--grey);
+}
+
+.button.transparent:hover,
+.button.transparent:focus,
+.button.transparent:active {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.button[disabled],
+.button[disabled],
+.button[disabled] {
+  border-color: var(--grey) !important;
+  background-color: var(--grey) !important;
+  cursor: not-allowed;
 }
 
 .button.small {

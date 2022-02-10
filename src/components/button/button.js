@@ -18,16 +18,19 @@ const Button = ({
   children,
   primary = false,
   secondary = false,
+  transparent = false,
   small = false,
   block = false,
+  classNames,
   ...props
 }) => {
   const Icon = icons[icon];
   return (
     <button
-      className={cn(styles.button, {
+      className={cn(styles.button, classNames, {
         [styles.primary]: primary,
         [styles.secondary]: secondary,
+        [styles.transparent]: transparent,
         [styles.small]: small,
         [styles.block]: block,
       })}

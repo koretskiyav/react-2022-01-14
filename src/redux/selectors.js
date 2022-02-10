@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const restaurantsSelector = (state) => state.restaurants.entities;
 const productsSelector = (state) => state.products.entities;
-const orderSelector = (state) => state.order;
+const orderSelector = (state) => state.order.cart;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
 
@@ -21,6 +21,9 @@ export const reviewsLoadedSelector = (state, props) =>
 
 export const usersLoadingSelector = (state) => state.users.loading;
 export const usersLoadedSelector = (state) => state.users.loaded;
+
+export const orderProcessingSelector = (state) => state.order.processing;
+export const orderErrorSelector = (state) => state.order.error;
 
 export const restaurantsListSelector = createSelector(
   restaurantsSelector,
@@ -58,6 +61,11 @@ export const orderProductsSelector = createSelector(
         subtotal: order[product.id] * product.price,
         restId: restaurantsIds[product.id],
       }))
+);
+
+export const cartSelector = createSelector(
+    orderProductsSelector,
+    products => products.map(({product: {id,}, amount,}) => ({id, amount,}))
 );
 
 export const totalSelector = createSelector(
