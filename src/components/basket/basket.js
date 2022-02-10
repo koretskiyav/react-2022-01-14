@@ -8,13 +8,29 @@ import './basket.css';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import { orderProductsSelector, pathnameSelector, totalSelector } from '../../redux/selectors';
 
 import { UserConsumer } from '../../contexts/user-context';
+import { useEffect, useState } from 'react';
+import { sendOrder } from '../../redux/actions';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({ title = 'Basket', total, orderProducts, pathname, sendOrder }) {
   // const { name } = useContext(userContext);
+  const [link, setLink] = useState('/checkout');
+  
+  let orderBtn = null;
+  const setRef = (ref) => {
+    orderBtn = ref;
+  }
 
+  useEffect(() => {
+    if(pathname === '/checkout'){
+      setLink('/sending')
+      orderBtn.addEventListener('click', sendOrder)
+    }
+  },[])
+
+  
   if (!total) {
     return (
       <div className={styles.basket}>
@@ -54,8 +70,8 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           <p>{`${total} $`}</p>
         </div>
       </div>
-      <Link to="/checkout">
-        <Button primary block>
+      <Link to={link} ref={setRef} >
+        <Button primary block >
           checkout
         </Button>
       </Link>
@@ -67,7 +83,12 @@ const mapStateToProps = (state) => {
   return {
     total: totalSelector(state),
     orderProducts: orderProductsSelector(state),
+    pathname: pathnameSelector(state),
   };
 };
 
-export default connect(mapStateToProps)(Basket);
+const mapDispatchToProps = {
+  sendOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);
