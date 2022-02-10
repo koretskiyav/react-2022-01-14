@@ -12,6 +12,7 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  CHECKOUT,
 } from './constants';
 
 import {
@@ -24,6 +25,28 @@ import {
 export const increment = (id) => ({ type: INCREMENT, id });
 export const decrement = (id) => ({ type: DECREMENT, id });
 export const remove = (id) => ({ type: REMOVE, id });
+
+export const checkout = () => async (dispatch, getState) => {
+  const state = getState();
+  const order = Object.keys(state.order.entities).map((productId) => {
+    return { id: productId, amount: state.order.entities[productId] };
+  });
+
+  dispatch({ type: CHECKOUT + REQUEST });
+
+  try {
+    const response = await fetch('/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order),
+    }).then((res) => res.json());
+    dispatch({ type: CHECKOUT + SUCCESS, response });
+    if (response === 'ok') dispatch(replace('/thanks-for-your-order'));
+  } catch (error) {
+    dispatch({ type: CHECKOUT + FAILURE, error });
+    dispatch(replace('/error'));
+  }
+};
 
 export const addReview = (review, restId) => ({
   type: ADD_REVIEW,
