@@ -5,15 +5,19 @@ import styles from './product.module.css';
 import Button from '../button';
 import { decrement, increment } from '../../redux/actions';
 import { amountSelector, productSelector } from '../../redux/selectors';
+import { useContext } from 'react';
+import { currencyContext } from '../../contexts/currency-context';
 
 function Product({ product, amount, decrement, increment }) {
+  const { getAmount } = useContext(currencyContext);
+
   return (
     <div className={styles.product} data-id="product">
       <div className={styles.content}>
         <div>
           <h4 className={styles.title}>{product.name}</h4>
           <p className={styles.description}>{product.ingredients.join(', ')}</p>
-          <div className={styles.price}>{product.price} $</div>
+          <div className={styles.price}>{getAmount(product.price)}</div>
         </div>
         <div>
           <div className={styles.counter}>

@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const restaurantsSelector = (state) => state.restaurants.entities;
 const productsSelector = (state) => state.products.entities;
-const orderSelector = (state) => state.order;
+const orderSelector = (state) => state.order.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
 
@@ -13,6 +13,9 @@ export const productsLoadingSelector = (state, props) =>
   state.products.loading[props.restId];
 export const productsLoadedSelector = (state, props) =>
   state.products.loaded[props.restId];
+
+export const orderLoadingSelector = (state) => state.order.loading;
+export const orderErrorSelector = (state) => state.order.error;
 
 export const reviewsLoadingSelector = (state, props) =>
   state.reviews.loading[props.restId];
@@ -58,6 +61,14 @@ export const orderProductsSelector = createSelector(
         subtotal: order[product.id] * product.price,
         restId: restaurantsIds[product.id],
       }))
+);
+
+export const orderProductsJsonSelector = createSelector(
+  [orderProductsSelector],
+  (products) =>
+    JSON.stringify(
+      products.map(({ product, amount }) => ({ id: product.id, amount }))
+    )
 );
 
 export const totalSelector = createSelector(
