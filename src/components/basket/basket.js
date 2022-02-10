@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -8,12 +8,23 @@ import './basket.css';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import Loader from '../loader';
+import { checkout } from '../../redux/actions';
+import {
+  orderProductsSelector,
+  totalSelector,
+  requestSelector,
+} from '../../redux/selectors';
 
 import { UserConsumer } from '../../contexts/user-context';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({ title = 'Basket', total, orderProducts, checkout, request }) {
   // const { name } = useContext(userContext);
+  const path = useLocation().pathname;
+
+  if (request) {
+    return <Loader />;
+  }
 
   if (!total) {
     return (
@@ -22,6 +33,10 @@ function Basket({ title = 'Basket', total, orderProducts }) {
       </div>
     );
   }
+
+  const handleClick = () => {
+    if (path === '/checkout') return checkout;
+  };
 
   return (
     <div className={styles.basket}>
@@ -55,7 +70,7 @@ function Basket({ title = 'Basket', total, orderProducts }) {
         </div>
       </div>
       <Link to="/checkout">
-        <Button primary block>
+        <Button onClick={handleClick()} primary block>
           checkout
         </Button>
       </Link>
@@ -67,7 +82,12 @@ const mapStateToProps = (state) => {
   return {
     total: totalSelector(state),
     orderProducts: orderProductsSelector(state),
+    request: requestSelector(state),
   };
 };
 
-export default connect(mapStateToProps)(Basket);
+const mapDispatchToProps = (dispatch, props) => ({
+  checkout: () => dispatch(checkout(props)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);
