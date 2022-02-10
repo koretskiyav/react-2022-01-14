@@ -31,7 +31,7 @@ const Reviews = ({
 
   return (
     <div className={styles.reviews}>
-      <TransitionGroup>
+      <TransitionGroup component={null}>
         {reviews.map((id) => (
             <CSSTransition
                 key={id}

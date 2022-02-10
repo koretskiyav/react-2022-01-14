@@ -55,6 +55,14 @@
   background-color: var(--grey);
 }
 
+.button[disabled],
+.button[disabled],
+.button[disabled] {
+  border-color: var(--grey) !important;
+  background-color: var(--grey) !important;
+  cursor: not-allowed;
+}
+
 .button.small {
   width: 20px;
   height: 20px;

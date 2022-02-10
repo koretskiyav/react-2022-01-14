@@ -4,6 +4,7 @@ import Restaurants from '../restaurants';
 import Header from '../header';
 import Basket from '../basket';
 import { UserProvider } from '../../contexts/user-context';
+import CheckoutStatus from '../checkout-status';
 
 const App = () => {
   const [name, setName] = useState('Andrey');
@@ -13,7 +14,8 @@ const App = () => {
         <Header />
         <Switch>
           <Redirect exact from="/" to="/restaurants" />
-          <Route path="/checkout" component={Basket} />
+          <Route exact path="/checkout" component={Basket} />
+          <Route exact path="/checkout/status" component={CheckoutStatus} />
           <Route path="/restaurants" component={Restaurants} />
           <Route path="/error" component={() => <h2>Error Page</h2>} />
           <Route path="/" component={() => <h2>404 - Not Found Page :(</h2>} />
