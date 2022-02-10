@@ -17,6 +17,8 @@ import {
 import { checkoutOrder } from '../../redux/actions';
 
 import { UserConsumer } from '../../contexts/user-context';
+import { useContext } from 'react';
+import { currencyContext } from '../../contexts/currency-context';
 
 function Basket({
   title = 'Basket',
@@ -25,7 +27,7 @@ function Basket({
   loading,
   checkoutOrder,
 }) {
-  // const { name } = useContext(userContext);
+  const { getAmount } = useContext(currencyContext);
 
   if (loading) {
     return <Loader />;
@@ -40,60 +42,52 @@ function Basket({
   }
 
   return (
-    <Switch>
-      <Route
-        path="/checkout/success"
-        component={() => <h2>Спасибо за заказ!</h2>}
-      />
-      <Route path="/">
-        <div className={styles.basket}>
-          <h4 className={styles.title}>
-            <UserConsumer>{({ name }) => `${name}'s ${title}`}</UserConsumer>
-          </h4>
-          {/* <h4 className={styles.title}>{`${name}'s ${title}`}</h4> */}
-          <TransitionGroup>
-            {orderProducts.map(({ product, amount, subtotal, restId }) => (
-              <CSSTransition
-                key={product.id}
-                timeout={500}
-                classNames="basket-item"
-              >
-                <BasketItem
-                  product={product}
-                  amount={amount}
-                  subtotal={subtotal}
-                  restId={restId}
-                />
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-          <hr className={styles.hr} />
-          <div className={itemStyles.basketItem}>
-            <div className={itemStyles.name}>
-              <p>Total</p>
-            </div>
-            <div className={itemStyles.info}>
-              <p>{`${total} $`}</p>
-            </div>
-          </div>
-
-          <Switch>
-            <Route path="/checkout" exact>
-              <Button primary block onClick={checkoutOrder}>
-                checkout
-              </Button>
-            </Route>
-            <Route path="/">
-              <Link to="/checkout">
-                <Button primary block>
-                  checkout
-                </Button>
-              </Link>
-            </Route>
-          </Switch>
+    <div className={styles.basket}>
+      <h4 className={styles.title}>
+        <UserConsumer>{({ name }) => `${name}'s ${title}`}</UserConsumer>
+      </h4>
+      {/* <h4 className={styles.title}>{`${name}'s ${title}`}</h4> */}
+      <TransitionGroup>
+        {orderProducts.map(({ product, amount, subtotal, restId }) => (
+          <CSSTransition
+            key={product.id}
+            timeout={500}
+            classNames="basket-item"
+          >
+            <BasketItem
+              product={product}
+              amount={amount}
+              subtotal={subtotal}
+              restId={restId}
+            />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
+      <hr className={styles.hr} />
+      <div className={itemStyles.basketItem}>
+        <div className={itemStyles.name}>
+          <p>Total</p>
         </div>
-      </Route>
-    </Switch>
+        <div className={itemStyles.info}>
+          <p>{getAmount(total)}</p>
+        </div>
+      </div>
+
+      <Switch>
+        <Route path="/checkout" exact>
+          <Button primary block onClick={checkoutOrder}>
+            checkout
+          </Button>
+        </Route>
+        <Route path="/">
+          <Link to="/checkout">
+            <Button primary block>
+              checkout
+            </Button>
+          </Link>
+        </Route>
+      </Switch>
+    </div>
   );
 }
 

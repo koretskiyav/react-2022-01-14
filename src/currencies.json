@@ -1,0 +1,27 @@
+[
+  {
+    "name": "USD",
+    "rate": 1,
+    "sign": "$"
+  },
+  {
+    "name": "EUR",
+    "rate": 0.87,
+    "sign": "€"
+  },
+  {
+    "name": "RUB",
+    "rate": 74.9,
+    "sign": "₽"
+  },
+  {
+    "name": "TRY",
+    "rate": 13.47,
+    "sign": "₺"
+  },
+  {
+    "name": "KES",
+    "rate": 113.65,
+    "sign": "Ksh"
+  }
+]
