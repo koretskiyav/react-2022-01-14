@@ -5,21 +5,24 @@ import Header from '../header';
 import Basket from '../basket';
 import { UserProvider } from '../../contexts/user-context';
 import CheckoutStatus from '../checkout-status';
+import {CurrencyProvider} from '../../contexts/currency-context';
 
 const App = () => {
   const [name, setName] = useState('Andrey');
   return (
     <div>
       <UserProvider value={{ name, setName }}>
-        <Header />
-        <Switch>
-          <Redirect exact from="/" to="/restaurants" />
-          <Route exact path="/checkout" component={Basket} />
-          <Route exact path="/checkout/status" component={CheckoutStatus} />
-          <Route path="/restaurants" component={Restaurants} />
-          <Route path="/error" component={() => <h2>Error Page</h2>} />
-          <Route path="/" component={() => <h2>404 - Not Found Page :(</h2>} />
-        </Switch>
+        <CurrencyProvider>
+          <Header />
+          <Switch>
+            <Redirect exact from="/" to="/restaurants" />
+            <Route exact path="/checkout" component={Basket} />
+            <Route exact path="/checkout/status" component={CheckoutStatus} />
+            <Route path="/restaurants" component={Restaurants} />
+            <Route path="/error" component={() => <h2>Error Page</h2>} />
+            <Route path="/" component={() => <h2>404 - Not Found Page :(</h2>} />
+          </Switch>
+        </CurrencyProvider>
       </UserProvider>
     </div>
   );

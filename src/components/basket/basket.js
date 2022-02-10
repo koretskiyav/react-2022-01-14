@@ -14,6 +14,7 @@ import { createOrder } from '../../redux/actions';
 import { UserConsumer } from '../../contexts/user-context';
 import Loader from '../loader';
 import cn from 'classnames';
+import Cost from '../cost/cost';
 
 function Basket({ title = 'Basket', total, orderProducts, createOrder, isProcessing }) {
   // const { name } = useContext(userContext);
@@ -59,7 +60,7 @@ function Basket({ title = 'Basket', total, orderProducts, createOrder, isProcess
           <p>Total</p>
         </div>
         <div className={itemStyles.info}>
-          <p>{`${total} $`}</p>
+          <p><Cost value={total}/></p>
         </div>
       </div>
       {

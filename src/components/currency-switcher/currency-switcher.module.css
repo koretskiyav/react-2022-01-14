@@ -1,0 +1,14 @@
+.currencies {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.currencyControl {
+    text-decoration: underline;
+}
+
+.currencyControl.currencyControlActive {
+    text-decoration: none;
+    cursor: text;
+}
