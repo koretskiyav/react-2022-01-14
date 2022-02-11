@@ -21,6 +21,7 @@ import {
   reviewsLoadingSelector,
   reviewsLoadedSelector,
   orderProductsForAPISelector,
+  orderSendedSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -80,6 +81,7 @@ export const loadUsers = () => async (dispatch, getState) => {
 export const sendOrder = () => async (dispatch, getState) => {
   const state = getState();
   const order = orderProductsForAPISelector(state);
+  const sended = orderSendedSelector(state);
   dispatch({ type: SEND_ORDER + REQUEST })
 
   try{
@@ -90,6 +92,7 @@ export const sendOrder = () => async (dispatch, getState) => {
     .then(res => res.json())
 
     dispatch({ type: SEND_ORDER + SUCCESS, response  })
+    dispatch(replace("/checkout/orderStatus"))
   } catch (error){
     dispatch({ type: SEND_ORDER + FAILURE, error})
     dispatch(replace('/error'))

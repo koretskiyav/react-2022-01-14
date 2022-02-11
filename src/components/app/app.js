@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Restaurants from '../restaurants';
 import Header from '../header';
 import Basket from '../basket';
-import sendOrder from '../sendOrder';
+import OrderStatus from '../orderStatus';
 import { UserProvider } from '../../contexts/user-context';
 
 
@@ -15,9 +15,9 @@ const App = () => {
         <Header />
         <Switch>
           <Redirect exact from="/" to="/restaurants" />
-          <Route path="/checkout" component={Basket} />
+          <Route exact path="/checkout" component={Basket} />
+          <Route exact path="/checkout/orderStatus" component={OrderStatus} />
           <Route path="/restaurants" component={Restaurants} />
-          <Route path="/sending" component={sendOrder} />
           <Route path="/error" component={() => <h2>Error Page</h2>} />
           <Route path="/" component={() => <h2>404 - Not Found Page :(</h2>} />
         </Switch>

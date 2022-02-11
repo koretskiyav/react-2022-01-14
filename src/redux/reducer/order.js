@@ -44,7 +44,7 @@ export default (state = initialState, action) =>
         if(response !== 'ok') {
           draft.error = response;
         } else {
-          draft.answer = 'Success';
+          draft.answer = 'Спасибо за закааз!';
           draft.entities = {};
         }
         draft.sended = true;
