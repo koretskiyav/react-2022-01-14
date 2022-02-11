@@ -12,6 +12,7 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  SEND_ORDER,
 } from './constants';
 
 import {
@@ -19,6 +20,8 @@ import {
   usersLoadedSelector,
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  orderProductsForAPISelector,
+  orderSendedSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, id });
@@ -73,3 +76,25 @@ export const loadUsers = () => async (dispatch, getState) => {
 
   dispatch(_loadUsers());
 };
+
+
+export const sendOrder = () => async (dispatch, getState) => {
+  const state = getState();
+  const order = orderProductsForAPISelector(state);
+  const sended = orderSendedSelector(state);
+  dispatch({ type: SEND_ORDER + REQUEST })
+
+  try{
+    const response = await fetch('/api/order', 
+    { method: 'POST', 
+    headers: { 'Content-Type': 'application/json' }, 
+    body: JSON.stringify(order)})
+    .then(res => res.json())
+
+    dispatch({ type: SEND_ORDER + SUCCESS, response  })
+    dispatch(replace("/checkout/orderStatus"))
+  } catch (error){
+    dispatch({ type: SEND_ORDER + FAILURE, error})
+    dispatch(replace('/error'))
+  }
+}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -8,12 +8,25 @@ import './basket.css';
 import itemStyles from './basket-item/basket-item.module.css';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import Loader from '../loader/loader';
+import { orderProductsSelector, orderSendingSelector, totalSelector } from '../../redux/selectors';
 
 import { UserConsumer } from '../../contexts/user-context';
+import { sendOrder } from '../../redux/actions';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({ title = 'Basket', total, orderProducts, sendOrder, sending, sended }) {
   // const { name } = useContext(userContext);
+
+  const match = useRouteMatch("/checkout");
+
+  if(sending) {
+    return (
+      <div>      
+        <p>Отправка заказа</p>
+        <Loader/>
+      </div>
+    )
+  }
 
   if (!total) {
     return (
@@ -54,11 +67,18 @@ function Basket({ title = 'Basket', total, orderProducts }) {
           <p>{`${total} $`}</p>
         </div>
       </div>
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
-        </Button>
-      </Link>
+      {match?.isExact ?
+          <Button primary block onClick={sendOrder}>
+            checkout
+          </Button>
+        :
+        <Link to={"/checkout"}>
+          <Button primary block >
+            checkout
+          </Button>
+          </Link>  
+      }
+
     </div>
   );
 }
@@ -67,7 +87,13 @@ const mapStateToProps = (state) => {
   return {
     total: totalSelector(state),
     orderProducts: orderProductsSelector(state),
+    sending: orderSendingSelector(state),
+    sended: orderSendingSelector(state),
   };
 };
 
-export default connect(mapStateToProps)(Basket);
+const mapDispatchToProps = {
+  sendOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);
